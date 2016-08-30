@@ -1,5 +1,9 @@
 package com.github.globant.githubsubscribers.subscriberslist;
 
+import com.github.globant.githubsubscribers.commons.models.Subscriber;
+
+import java.util.List;
+
 /**
  * Interface SubscribersListView that represents the View class(Activity)
  *
@@ -8,6 +12,6 @@ package com.github.globant.githubsubscribers.subscriberslist;
  */
 public interface SubscribersListView {
 
-    void navigateToUserDetail();
+    void navigateToUserDetail(List<Subscriber> subscriberList);
 
 }

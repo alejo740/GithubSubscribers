@@ -12,6 +12,8 @@ import retrofit2.http.GET;
  * ApiClientGithub class that works as a singleton to provide a Retrofit instance of Git Api and their end-points
  *
  * @author edwin.cobos
+ * @author juan.herrera
+ *
  * @since 19/08/2016
  */
 public class ApiClientGithub {
@@ -34,7 +36,10 @@ public class ApiClientGithub {
      */
     public interface GithubApiInterface {
 
-        @GET("repos/googlesamples/android-architecture/subscribers")
+        /*@GET("repos/googlesamples/android-architecture/subscribers")
+        Call<List<Subscriber>> getSubscribers();*/
+
+        @GET("repos/octokit/octokit.rb/subscribers")
         Call<List<Subscriber>> getSubscribers();
 
     }

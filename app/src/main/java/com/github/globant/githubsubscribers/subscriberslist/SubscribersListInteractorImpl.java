@@ -29,7 +29,7 @@ public class SubscribersListInteractorImpl implements SubscribersListInteractor 
 
             @Override
             public void onFailure(Call<List<Subscriber>> call, Throwable t) {
-                //TODO: Implement failure answer to presenter
+                listener.onFailed(t.getMessage());
             }
         });
     }
