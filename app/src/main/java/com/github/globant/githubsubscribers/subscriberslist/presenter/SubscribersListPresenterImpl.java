@@ -1,9 +1,11 @@
-package com.github.globant.githubsubscribers.subscriberslist;
+package com.github.globant.githubsubscribers.subscriberslist.presenter;
 
 import com.github.globant.githubsubscribers.commons.models.Subscriber;
 import com.github.globant.githubsubscribers.commons.utils.Utils;
+import com.github.globant.githubsubscribers.subscriberslist.interactor.SubscribersListInteractor;
+import com.github.globant.githubsubscribers.subscriberslist.interactor.SubscribersListInteractorImpl;
+import com.github.globant.githubsubscribers.subscriberslist.view.SubscribersListView;
 
-import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -39,13 +41,12 @@ public class SubscribersListPresenterImpl implements SubscribersListPresenter, S
     }
 
     @Override
-    public void onFinished(List<Subscriber> listItems) {
-        view.navigateToUserDetail(listItems);
-        //Utils.debugLog(Arrays.deepToString(listItems.toArray()));
+    public void onResponse(List<Subscriber> listItems) {
+        view.showSubscribersList(listItems);
     }
 
     @Override
-    public void onFailed(String errorMessage) {
+    public void onFailure(String errorMessage) {
         Utils.debugLog(errorMessage);
     }
 }

@@ -1,4 +1,4 @@
-package com.github.globant.githubsubscribers.subscriberslist;
+package com.github.globant.githubsubscribers.subscriberslist.view;
 
 import com.github.globant.githubsubscribers.commons.models.Subscriber;
 
@@ -12,6 +12,8 @@ import java.util.List;
  */
 public interface SubscribersListView {
 
-    void navigateToUserDetail(List<Subscriber> subscriberList);
+    void navigateToUserDetail();
+
+    void showSubscribersList(List<Subscriber> subscriberList);
 
 }

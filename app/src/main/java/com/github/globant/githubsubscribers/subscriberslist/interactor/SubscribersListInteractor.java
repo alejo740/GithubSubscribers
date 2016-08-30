@@ -1,4 +1,4 @@
-package com.github.globant.githubsubscribers.subscriberslist;
+package com.github.globant.githubsubscribers.subscriberslist.interactor;
 
 import com.github.globant.githubsubscribers.commons.models.Subscriber;
 
@@ -13,8 +13,8 @@ import java.util.List;
  */
 public interface SubscribersListInteractor {
     interface OnFinishedListener {
-        void onFinished(List<Subscriber> listItems);
-        void onFailed(String errorMessage);
+        void onResponse(List<Subscriber> listItems);
+        void onFailure(String errorMessage);
     }
 
     void getSubscribersDataList(OnFinishedListener listener);

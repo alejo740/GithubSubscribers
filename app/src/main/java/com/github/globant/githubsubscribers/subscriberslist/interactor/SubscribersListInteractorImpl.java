@@ -1,4 +1,4 @@
-package com.github.globant.githubsubscribers.subscriberslist;
+package com.github.globant.githubsubscribers.subscriberslist.interactor;
 
 import com.github.globant.githubsubscribers.commons.models.Subscriber;
 import com.github.globant.githubsubscribers.commons.utils.ApiClientGithub;
@@ -24,12 +24,12 @@ public class SubscribersListInteractorImpl implements SubscribersListInteractor 
             @Override
             public void onResponse(Call<List<Subscriber>> call, Response<List<Subscriber>> response) {
                 List<Subscriber> userList = response.body();
-                listener.onFinished(userList);
+                listener.onResponse(userList);
             }
 
             @Override
             public void onFailure(Call<List<Subscriber>> call, Throwable t) {
-                listener.onFailed(t.getMessage());
+                listener.onFailure(t.getMessage());
             }
         });
     }
