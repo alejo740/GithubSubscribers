@@ -1,4 +1,4 @@
-package com.github.globant.githubsubscribers.subscriberslist;
+package com.github.globant.githubsubscribers.subscriberslist.view;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -10,6 +10,8 @@ import android.view.ViewGroup;
 
 import com.github.globant.githubsubscribers.R;
 import com.github.globant.githubsubscribers.commons.models.Subscriber;
+import com.github.globant.githubsubscribers.subscriberslist.presenter.SubscribersListPresenter;
+import com.github.globant.githubsubscribers.subscriberslist.presenter.SubscribersListPresenterImpl;
 
 import java.util.List;
 

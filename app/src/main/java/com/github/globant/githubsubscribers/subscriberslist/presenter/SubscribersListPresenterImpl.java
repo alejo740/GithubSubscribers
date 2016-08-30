@@ -1,9 +1,11 @@
-package com.github.globant.githubsubscribers.subscriberslist;
+package com.github.globant.githubsubscribers.subscriberslist.presenter;
 
 import com.github.globant.githubsubscribers.commons.models.Subscriber;
 import com.github.globant.githubsubscribers.commons.utils.Utils;
+import com.github.globant.githubsubscribers.subscriberslist.view.SubscribersListView;
+import com.github.globant.githubsubscribers.subscriberslist.interactor.SubscribersListInteractor;
+import com.github.globant.githubsubscribers.subscriberslist.interactor.SubscribersListInteractorImpl;
 
-import java.util.Arrays;
 import java.util.List;
 
 /**

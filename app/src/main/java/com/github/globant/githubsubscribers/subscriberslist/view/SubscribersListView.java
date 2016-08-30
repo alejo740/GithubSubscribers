@@ -1,4 +1,4 @@
-package com.github.globant.githubsubscribers.subscriberslist;
+package com.github.globant.githubsubscribers.subscriberslist.view;
 
 import com.github.globant.githubsubscribers.commons.models.Subscriber;
 
