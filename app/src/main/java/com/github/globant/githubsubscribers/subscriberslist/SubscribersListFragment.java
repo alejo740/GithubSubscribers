@@ -44,7 +44,11 @@ public class SubscribersListFragment extends Fragment implements SubscribersList
     }
 
     @Override
-    public void navigateToUserDetail(List<Subscriber> subscriberList) {
+    public void navigateToUserDetail() {
+    }
+
+    @Override
+    public void showSubscribersList(List<Subscriber> subscriberList) {
         subscribersAdapter.setItems(subscriberList);
     }
 }
