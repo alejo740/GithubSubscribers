@@ -14,7 +14,7 @@ public class Constants {
     public static final boolean DEBUG_LOGS = true;
 
     public static final long SPLASH_DELAY = 3000;
-    public final static class SPLASH_LOGO_ANIMATION {
+    public final static class SplashLogoAnimation {
         public final static long START_DELAY = 200;
         public final static long DURATION = 1300;
         public final static float INIT_SCALE = 0.0f;

@@ -33,13 +33,13 @@ public class SplashActivity extends AppCompatActivity {
     private void startAnimation() {
         logoImage = (ImageView) findViewById(R.id.splashLogo);
 
-        logoImage.setScaleX(Constants.SPLASH_LOGO_ANIMATION.INIT_SCALE);
-        logoImage.setScaleY(Constants.SPLASH_LOGO_ANIMATION.INIT_SCALE);
+        logoImage.setScaleX(Constants.SplashLogoAnimation.INIT_SCALE);
+        logoImage.setScaleY(Constants.SplashLogoAnimation.INIT_SCALE);
         logoImage.animate().
-                setStartDelay(Constants.SPLASH_LOGO_ANIMATION.START_DELAY).
-                setDuration(Constants.SPLASH_LOGO_ANIMATION.DURATION).
-                scaleX(Constants.SPLASH_LOGO_ANIMATION.FINAL_SCALE).
-                scaleY(Constants.SPLASH_LOGO_ANIMATION.FINAL_SCALE);
+                setStartDelay(Constants.SplashLogoAnimation.START_DELAY).
+                setDuration(Constants.SplashLogoAnimation.DURATION).
+                scaleX(Constants.SplashLogoAnimation.FINAL_SCALE).
+                scaleY(Constants.SplashLogoAnimation.FINAL_SCALE);
     }
 
     /**
