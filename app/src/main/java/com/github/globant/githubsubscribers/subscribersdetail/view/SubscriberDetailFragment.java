@@ -14,7 +14,7 @@ import com.github.globant.githubsubscribers.R;
  * @author juan.herrera
  * @since 31/08/2016
  */
-public class SubscribersDetailFragment extends Fragment {
+public class SubscriberDetailFragment extends Fragment {
 
     @Override
     public void onCreate(Bundle savedInstanceState){
