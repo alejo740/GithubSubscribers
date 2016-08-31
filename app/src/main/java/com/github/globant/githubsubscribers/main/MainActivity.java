@@ -14,10 +14,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         if(savedInstanceState == null){
-            /*SubscribersListFragment subscribersListFragment = new SubscribersListFragment();
-            getSupportFragmentManager().beginTransaction().add(R.id.fragment_container, subscribersListFragment).commit();*/
-
-            SubscriberDetailFragment subscribersListFragment = new SubscriberDetailFragment();
+            SubscribersListFragment subscribersListFragment = new SubscribersListFragment();
             getSupportFragmentManager().beginTransaction().add(R.id.fragment_container, subscribersListFragment).commit();
         }
     }

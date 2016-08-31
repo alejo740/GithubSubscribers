@@ -29,8 +29,8 @@ public class SubscriberDetailPresenterImpl implements SubscriberDetailPresenter,
     }
 
     @Override
-    public void onFailed(String errorMessage) {
-        Utils.debugLog(errorMessage);
+    public void onFailure(String errorMessage) {
+        view.showSubscribersError();
     }
 
     @Override

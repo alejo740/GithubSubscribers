@@ -13,7 +13,7 @@ import java.util.List;
 public interface SubscriberDetailInteractor {
     interface OnFinishedListener {
         void onFinished(User userItem);
-        void onFailed(String errorMessage);
+        void onFailure(String errorMessage);
     }
 
     void getUserData(OnFinishedListener listener, String userName);

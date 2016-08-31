@@ -27,7 +27,7 @@ public class SubscriberDetailInteractorImpl implements SubscriberDetailInteracto
 
             @Override
             public void onFailure(Call<User> call, Throwable t) {
-                listener.onFailed(t.getMessage());
+                listener.onFailure(t.getMessage());
             }
         });
     }

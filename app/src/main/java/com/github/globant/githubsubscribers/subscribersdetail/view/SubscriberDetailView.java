@@ -13,4 +13,6 @@ import java.util.List;
 public interface SubscriberDetailView {
 
     void showSubscriberUser(User subscriberUser);
+
+    void showSubscribersError();
 }

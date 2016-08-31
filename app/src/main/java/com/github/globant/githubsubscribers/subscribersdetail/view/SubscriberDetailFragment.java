@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.github.globant.githubsubscribers.R;
 import com.github.globant.githubsubscribers.commons.models.User;
@@ -35,7 +36,7 @@ public class SubscriberDetailFragment extends Fragment implements SubscriberDeta
     private SubscriberDetailPresenter presenter;
 
     @Override
-    public void onCreate(Bundle savedInstanceState){
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
     }
 
@@ -64,5 +65,10 @@ public class SubscriberDetailFragment extends Fragment implements SubscriberDeta
         txtLocation.setText(subscriberUser.getLocation());
         txtFollowingCounter.setText(String.valueOf(subscriberUser.getFollowers()));
         txtReposCounter.setText(String.valueOf(subscriberUser.getPublicRepos()));
+    }
+
+    @Override
+    public void showSubscribersError() {
+        Toast.makeText(getContext(), R.string.api_client_error, Toast.LENGTH_LONG).show();
     }
 }
