@@ -42,7 +42,7 @@ public class ApiClientGithub {
         Call<List<Subscriber>> getSubscribers();
 
         @GET("users/{user}")
-        Call<List<User>> getSubscriberUser(@Path("user") String userName);
+        Call<User> getSubscriberUser(@Path("user") String userName);
 
     }
 

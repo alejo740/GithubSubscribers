@@ -49,7 +49,7 @@ public class User {
     @SerializedName("public_repos")
     int publicRepos;
     @SerializedName("public_gists")
-    int public_gists;
+    int publicGists;
     int followers;
     int following;
     @SerializedName("created_at")
@@ -62,7 +62,7 @@ public class User {
                 String starredUrl, String subscriptionsUrl, String organizationsUrl, String reposUrl,
                 String eventsUrl, String receivedEventsUrl, String type, boolean siteAdmin,
                 String name, String company, String blog, String location, String email,
-                String hireable, String bio, int publicRepos, int public_gists, int followers,
+                String hireable, String bio, int publicRepos, int publicGists, int followers,
                 int following, String createdAt, String updatedAt) {
         this.login = login;
         this.id = id;
@@ -89,7 +89,7 @@ public class User {
         this.hireable = hireable;
         this.bio = bio;
         this.publicRepos = publicRepos;
-        this.public_gists = public_gists;
+        this.publicGists = publicGists;
         this.followers = followers;
         this.following = following;
         this.createdAt = createdAt;
@@ -196,8 +196,8 @@ public class User {
         return publicRepos;
     }
 
-    public int getPublic_gists() {
-        return public_gists;
+    public int getPublicGists() {
+        return publicGists;
     }
 
     public int getFollowers() {

@@ -5,12 +5,12 @@ import com.github.globant.githubsubscribers.commons.models.User;
 import java.util.List;
 
 /**
- * Interface UserView that represents the View class(Activity)
+ * Interface SubscriberDetailView that represents the View class(Activity)
  *
  * @author juan.herrera
  * @since 30/08/2016
  */
-public interface UserView {
+public interface SubscriberDetailView {
 
-    void showSubscriberUser(List<User> subscriberUserList);
+    void showSubscriberUser(User subscriberUser);
 }

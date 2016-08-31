@@ -4,7 +4,7 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".subscriberslist.view.SubscribersListFragment"
+    tools:context=".subscribersdetail.view.SubscriberDetailFragment"
     tools:showIn="@layout/activity_main">
 
     <ImageView
@@ -37,13 +37,6 @@
         android:layout_centerVertical="true"/>
     <TextView
         android:id="@+id/txt_location_subscriber_detail"
-        android:layout_marginTop="@dimen/txt_view_margin"
-        android:textSize="@dimen/txt_size_subsciber_detail"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerVertical="true"/>
-    <TextView
-        android:id="@+id/txt_followers_subscriber_detail"
         android:layout_marginTop="@dimen/txt_view_margin"
         android:textSize="@dimen/txt_size_subsciber_detail"
         android:layout_width="wrap_content"
