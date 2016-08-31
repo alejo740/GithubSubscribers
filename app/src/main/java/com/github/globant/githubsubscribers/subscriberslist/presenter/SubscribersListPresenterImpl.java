@@ -43,7 +43,6 @@ public class SubscribersListPresenterImpl implements SubscribersListPresenter, S
     @Override
     public void onFinished(List<Subscriber> listItems) {
         view.showSubscribersList(listItems);
-        //Utils.debugLog(Arrays.deepToString(listItems.toArray()));
     }
 
     @Override

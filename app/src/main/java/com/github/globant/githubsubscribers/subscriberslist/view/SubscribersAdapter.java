@@ -21,7 +21,7 @@ import java.util.List;
  * @author juan.herrera
  * @since 29/08/2016
  */
-public class SubscribersAdapter extends RecyclerView.Adapter<SubscribersAdapter.ViewHolder> {
+public class SubscribersAdapter extends RecyclerView.Adapter<SubscribersAdapter.SubscriberViewHolder> {
 
     private List<Subscriber> subscriberList;
     private Context context;
@@ -31,29 +31,15 @@ public class SubscribersAdapter extends RecyclerView.Adapter<SubscribersAdapter.
         this.context = context;
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder{
-
-        private TextView txtLoginSubscriber;
-        private ImageView imgAvatarSubscriber;
-
-        public ViewHolder(View itemView) {
-
-            super(itemView);
-            this.txtLoginSubscriber = (TextView) itemView.findViewById(R.id.txt_login_subscriber);
-            this.imgAvatarSubscriber = (ImageView)itemView.findViewById(R.id.img_avatar_subscriber);
-        }
+    @Override
+    public SubscriberViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
+        SubscriberItem item = new SubscriberItem(viewGroup.getContext());
+        return new SubscriberViewHolder(item);
     }
 
     @Override
-    public SubscribersAdapter.ViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
-        View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.row_subscriber, viewGroup, false);
-        return new ViewHolder(view);
-    }
-
-    @Override
-    public void onBindViewHolder(SubscribersAdapter.ViewHolder viewHolder, int position) {
-        viewHolder.txtLoginSubscriber.setText(this.subscriberList.get(position).getLogin());
-        Picasso.with(this.context).load(this.subscriberList.get(position).getAvataUrl()).into(viewHolder.imgAvatarSubscriber);
+    public void onBindViewHolder(SubscriberViewHolder viewHolder, int position) {
+        viewHolder.onBind(subscriberList.get(position));
     }
 
     @Override
@@ -65,5 +51,21 @@ public class SubscribersAdapter extends RecyclerView.Adapter<SubscribersAdapter.
         this.subscriberList.clear();
         this.subscriberList.addAll(subscriberList);
         notifyDataSetChanged();
+    }
+
+    public class SubscriberViewHolder extends RecyclerView.ViewHolder {
+
+        SubscriberItem item;
+
+        public SubscriberViewHolder(View itemView) {
+
+            super(itemView);
+            item = (SubscriberItem) itemView;
+        }
+
+
+        public void onBind(Subscriber item) {
+            this.item.onBind(item);
+        }
     }
 }
