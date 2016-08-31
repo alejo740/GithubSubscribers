@@ -2,15 +2,10 @@ package com.github.globant.githubsubscribers.subscriberslist.view;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.TextView;
 
-import com.github.globant.githubsubscribers.R;
 import com.github.globant.githubsubscribers.commons.models.Subscriber;
-import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;

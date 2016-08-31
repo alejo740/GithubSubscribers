@@ -1,12 +1,14 @@
 package com.github.globant.githubsubscribers.commons.utils;
 
 import com.github.globant.githubsubscribers.commons.models.Subscriber;
+import com.github.globant.githubsubscribers.commons.models.User;
 
 import java.util.List;
 import retrofit2.Call;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 import retrofit2.http.GET;
+import retrofit2.http.Path;
 
 /**
  * ApiClientGithub class that works as a singleton to provide a Retrofit instance of Git Api and their end-points
@@ -36,11 +38,11 @@ public class ApiClientGithub {
      */
     public interface GithubApiInterface {
 
-        /*@GET("repos/googlesamples/android-architecture/subscribers")
-        Call<List<Subscriber>> getSubscribers();*/
-
-        @GET("repos/octokit/octokit.rb/subscribers")
+        @GET("repos/googlesamples/android-architecture/subscribers")
         Call<List<Subscriber>> getSubscribers();
+
+        @GET("users/{user}")
+        Call<List<User>> getSubscriberUser(@Path("user") String userName);
 
     }
 
