@@ -47,6 +47,7 @@ public class SubscribersListPresenterImpl implements SubscribersListPresenter, S
 
     @Override
     public void onFailure(String errorMessage) {
-        Utils.debugLog(errorMessage);
+        //TODO: Manage message errors
+        view.showSubscribersError();
     }
 }

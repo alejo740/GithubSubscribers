@@ -1,6 +1,5 @@
 package com.github.globant.githubsubscribers.subscriberslist.view;
 
-import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,7 +18,6 @@ import java.util.List;
 public class SubscribersAdapter extends RecyclerView.Adapter<SubscribersAdapter.SubscriberViewHolder> {
 
     private List<Subscriber> subscriberList;
-    private Context context;
 
     public SubscribersAdapter() {
         this.subscriberList = new ArrayList<>();
@@ -49,7 +47,7 @@ public class SubscribersAdapter extends RecyclerView.Adapter<SubscribersAdapter.
 
     public class SubscriberViewHolder extends RecyclerView.ViewHolder {
 
-        SubscriberItem item;
+        private SubscriberItem item;
 
         public SubscriberViewHolder(View itemView) {
 

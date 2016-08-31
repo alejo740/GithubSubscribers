@@ -9,6 +9,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.github.globant.githubsubscribers.R;
 import com.github.globant.githubsubscribers.commons.models.Subscriber;
@@ -47,7 +48,6 @@ public class SubscribersListFragment extends Fragment implements SubscribersList
         RecyclerView recyclerViewSubscribers = (RecyclerView) viewFragment.findViewById(R.id.recycler_view_subscribers);
         recyclerViewSubscribers.setLayoutManager(new LinearLayoutManager(getActivity()));
         recyclerViewSubscribers.setAdapter(subscribersAdapter);
-        loadSubscribers();
         return viewFragment;
     }
 
@@ -57,9 +57,20 @@ public class SubscribersListFragment extends Fragment implements SubscribersList
     }
 
     @Override
+    public void onResume() {
+        super.onResume();
+        loadSubscribers();
+    }
+
+    @Override
     public void showSubscribersList(List<Subscriber> subscriberList) {
         subscribersAdapter.setItems(subscriberList);
         swipeLayout.setRefreshing(false);
+    }
+
+    @Override
+    public void showSubscribersError() {
+        Toast.makeText(getContext(), R.string.api_client_error, Toast.LENGTH_LONG).show();
     }
 
     @Override
