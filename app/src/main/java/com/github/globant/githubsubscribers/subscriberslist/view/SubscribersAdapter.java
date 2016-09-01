@@ -1,11 +1,15 @@
 package com.github.globant.githubsubscribers.subscriberslist.view;
 
-import android.content.Context;
 import android.support.v7.widget.RecyclerView;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
 
+import com.github.globant.githubsubscribers.R;
 import com.github.globant.githubsubscribers.commons.models.Subscriber;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,8 +31,8 @@ public class SubscribersAdapter extends RecyclerView.Adapter<SubscribersAdapter.
 
     @Override
     public SubscriberViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
-        SubscriberItem item = new SubscriberItem(viewGroup.getContext());
-        return new SubscriberViewHolder(item);
+        View itemView = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.row_subscriber, viewGroup, false);
+        return new SubscriberViewHolder(itemView);
     }
 
     @Override
@@ -52,27 +56,34 @@ public class SubscribersAdapter extends RecyclerView.Adapter<SubscribersAdapter.
     }
 
     public class SubscriberViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-        SubscriberItem item;
+        private ImageView image;
+        private TextView text;
 
         public SubscriberViewHolder(View itemView) {
             super(itemView);
-            item = (SubscriberItem) itemView;
+            image = (ImageView) itemView.findViewById(R.id.img_avatar_subscriber);
+            text = (TextView) itemView.findViewById(R.id.txt_login_subscriber);
             itemView.setOnClickListener(this);
         }
 
         public void onBind(Subscriber item) {
-            this.item.onBind(item);
+            text.setText(item.getLogin());
+            Picasso.with(image.getContext()).load(item.getAvataUrl()).into(image);
+        }
+
+        public String getUserName() {
+            return text.getText().toString();
         }
 
         @Override
         public void onClick(View view) {
             if (clickListener != null) {
-                clickListener.onClickItemList((SubscriberItem) view, getAdapterPosition());
+                clickListener.onClickItemList(this, getAdapterPosition());
             }
         }
     }
 
     public interface ItemClickListener {
-        void onClickItemList(SubscriberItem view, int position);
+        void onClickItemList(SubscriberViewHolder view, int position);
     }
 }

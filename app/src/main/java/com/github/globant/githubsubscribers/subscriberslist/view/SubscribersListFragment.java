@@ -11,7 +11,6 @@ import android.view.ViewGroup;
 
 import com.github.globant.githubsubscribers.R;
 import com.github.globant.githubsubscribers.commons.models.Subscriber;
-import com.github.globant.githubsubscribers.commons.utils.Utils;
 import com.github.globant.githubsubscribers.subscriberslist.presenter.SubscribersListPresenter;
 import com.github.globant.githubsubscribers.subscriberslist.presenter.SubscribersListPresenterImpl;
 
@@ -73,7 +72,7 @@ public class SubscribersListFragment extends Fragment implements SubscribersList
     }
 
     @Override
-    public void onClickItemList(SubscriberItem view, int position) {
+    public void onClickItemList(SubscribersAdapter.SubscriberViewHolder view, int position) {
         mListener.onChangeToSubscriberDetails(view.getUserName());
     }
 
