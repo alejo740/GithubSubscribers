@@ -18,6 +18,7 @@ import java.util.List;
  * Adapter class that puts data of subscribers list provided by a service
  *
  * @author juan.herrera
+ * @author edwin.cobos
  * @since 29/08/2016
  */
 public class SubscribersAdapter extends RecyclerView.Adapter<SubscribersAdapter.SubscriberViewHolder> {

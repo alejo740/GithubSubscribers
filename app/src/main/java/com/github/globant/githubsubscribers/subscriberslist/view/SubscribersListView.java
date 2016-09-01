@@ -14,4 +14,6 @@ public interface SubscribersListView {
 
     void showSubscribersList(List<Subscriber> subscriberList);
 
+    void showSubscribersError();
+
 }
