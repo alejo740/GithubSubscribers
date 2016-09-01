@@ -1,9 +1,12 @@
 package com.github.globant.githubsubscribers.subscribersdetail.view;
 
 import android.support.v7.widget.RecyclerView;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
+import com.github.globant.githubsubscribers.R;
 import com.github.globant.githubsubscribers.commons.models.Repository;
 
 import java.util.ArrayList;
@@ -26,8 +29,8 @@ public class SubscriberRepositoriesAdapter extends RecyclerView.Adapter<Subscrib
 
     @Override
     public SubscriberDetailViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
-        RepositoryItem item = new RepositoryItem(viewGroup.getContext());
-        return new SubscriberDetailViewHolder(item);
+        View itemView = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.row_repository, viewGroup, false);
+        return new SubscriberDetailViewHolder(itemView);
     }
 
     @Override
@@ -48,17 +51,17 @@ public class SubscriberRepositoriesAdapter extends RecyclerView.Adapter<Subscrib
 
     public class SubscriberDetailViewHolder extends RecyclerView.ViewHolder {
 
-        RepositoryItem item;
+        private TextView text;
 
         public SubscriberDetailViewHolder(View itemView) {
 
             super(itemView);
-            item = (RepositoryItem) itemView;
+            text = (TextView) itemView.findViewById(R.id.txt_repository_subscriber);
         }
 
 
         public void onBind(Repository item) {
-            this.item.onBind(item);
+            text.setText(item.getFullName());
         }
     }
 }
