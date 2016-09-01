@@ -1,9 +1,12 @@
 package com.github.globant.githubsubscribers.subscribersdetail.view;
 
 import android.support.v7.widget.RecyclerView;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
+import com.github.globant.githubsubscribers.R;
 import com.github.globant.githubsubscribers.commons.models.Repository;
 
 import java.util.ArrayList;
@@ -19,15 +22,16 @@ import java.util.List;
 public class SubscriberRepositoriesAdapter extends RecyclerView.Adapter<SubscriberRepositoriesAdapter.SubscriberDetailViewHolder> {
 
     private List<Repository> repositoryList;
+    private ItemClickListener clickListener;
 
-    public SubscriberRepositoriesAdapter(){
+    public SubscriberRepositoriesAdapter() {
         this.repositoryList = new ArrayList<>();
     }
 
     @Override
     public SubscriberDetailViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
-        RepositoryItem item = new RepositoryItem(viewGroup.getContext());
-        return new SubscriberDetailViewHolder(item);
+        View itemView = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.row_repository, viewGroup, false);
+        return new SubscriberDetailViewHolder(itemView);
     }
 
     @Override
@@ -40,25 +44,44 @@ public class SubscriberRepositoriesAdapter extends RecyclerView.Adapter<Subscrib
         return repositoryList.size();
     }
 
-    public void setItems(List<Repository> repositoryList){
+    public void setClickListener(ItemClickListener itemClickListener) {
+        this.clickListener = itemClickListener;
+    }
+
+    public void setItems(List<Repository> repositoryList) {
         this.repositoryList.clear();
         this.repositoryList.addAll(repositoryList);
         notifyDataSetChanged();
     }
 
-    public class SubscriberDetailViewHolder extends RecyclerView.ViewHolder {
+    public class SubscriberDetailViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
-        RepositoryItem item;
+        private TextView text;
+        private String repoUrl;
 
         public SubscriberDetailViewHolder(View itemView) {
-
             super(itemView);
-            item = (RepositoryItem) itemView;
+            text = (TextView) itemView.findViewById(R.id.txt_repository_subscriber);
         }
-
 
         public void onBind(Repository item) {
-            this.item.onBind(item);
+            text.setText(item.getFullName());
+            repoUrl = item.getHtmlUrl();
         }
+
+        public String getRepoUrl() {
+            return repoUrl;
+        }
+
+        @Override
+        public void onClick(View v) {
+            if (clickListener != null) {
+                clickListener.onClickItemList(this, getAdapterPosition());
+            }
+        }
+    }
+
+    public interface ItemClickListener {
+        void onClickItemList(SubscriberDetailViewHolder view, int position);
     }
 }

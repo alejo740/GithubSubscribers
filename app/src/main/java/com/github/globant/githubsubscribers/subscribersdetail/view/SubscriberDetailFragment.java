@@ -1,5 +1,7 @@
 package com.github.globant.githubsubscribers.subscribersdetail.view;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -14,6 +16,7 @@ import android.widget.Toast;
 import com.github.globant.githubsubscribers.R;
 import com.github.globant.githubsubscribers.commons.models.Repository;
 import com.github.globant.githubsubscribers.commons.models.User;
+import com.github.globant.githubsubscribers.commons.utils.Utils;
 import com.github.globant.githubsubscribers.subscribersdetail.presenter.SubscriberDetailPresenter;
 import com.github.globant.githubsubscribers.subscribersdetail.presenter.SubscriberDetailPresenterImpl;
 import com.squareup.picasso.Picasso;
@@ -26,7 +29,7 @@ import java.util.List;
  * @author juan.herrera
  * @since 31/08/2016
  */
-public class SubscriberDetailFragment extends Fragment implements SubscriberDetailView {
+public class SubscriberDetailFragment extends Fragment implements SubscriberDetailView, SubscriberRepositoriesAdapter.ItemClickListener{
 
     private static final String ARG_USERNAME = "ARG_USERNAME";
     private String userNameArg;
@@ -82,6 +85,7 @@ public class SubscriberDetailFragment extends Fragment implements SubscriberDeta
         RecyclerView recyclerViewSubscribers = (RecyclerView) viewFragment.findViewById(R.id.list_repositories);
         recyclerViewSubscribers.setLayoutManager(new LinearLayoutManager(getActivity()));
         recyclerViewSubscribers.setAdapter(repositoriesAdapter);
+        repositoriesAdapter.setClickListener(this);
         return viewFragment;
     }
 
@@ -116,5 +120,12 @@ public class SubscriberDetailFragment extends Fragment implements SubscriberDeta
     @Override
     public void showSubscriberUserRepositories(List<Repository> repositories) {
         repositoriesAdapter.setItems(repositories);
+    }
+
+    @Override
+    public void onClickItemList(SubscriberRepositoriesAdapter.SubscriberDetailViewHolder view, int position) {
+        String repoUrl = view.getRepoUrl();
+        Utils.debugLog("Click Repo "+repoUrl);
+        //TODO: Launch browser opening the Repo URL
     }
 }
