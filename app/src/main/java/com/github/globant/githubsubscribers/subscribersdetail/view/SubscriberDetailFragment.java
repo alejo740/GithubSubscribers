@@ -10,6 +10,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.github.globant.githubsubscribers.R;
+import com.github.globant.githubsubscribers.commons.models.Repository;
 import com.github.globant.githubsubscribers.commons.models.User;
 import com.github.globant.githubsubscribers.subscribersdetail.presenter.SubscriberDetailPresenter;
 import com.github.globant.githubsubscribers.subscribersdetail.presenter.SubscriberDetailPresenterImpl;
@@ -68,7 +69,17 @@ public class SubscriberDetailFragment extends Fragment implements SubscriberDeta
     }
 
     @Override
-    public void showSubscribersError() {
+    public void showSubscriberUserRepository(List<Repository> repositoryList) {
+
+    }
+
+    @Override
+    public void showUserError() {
+        Toast.makeText(getContext(), R.string.api_client_error, Toast.LENGTH_LONG).show();
+    }
+
+    @Override
+    public void showRepositoryError() {
         Toast.makeText(getContext(), R.string.api_client_error, Toast.LENGTH_LONG).show();
     }
 }

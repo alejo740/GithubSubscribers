@@ -1,5 +1,6 @@
 package com.github.globant.githubsubscribers.commons.utils;
 
+import com.github.globant.githubsubscribers.commons.models.Repository;
 import com.github.globant.githubsubscribers.commons.models.Subscriber;
 import com.github.globant.githubsubscribers.commons.models.User;
 
@@ -43,6 +44,9 @@ public class ApiClientGithub {
 
         @GET("users/{user}")
         Call<User> getSubscriberUser(@Path("user") String userName);
+
+        @GET("users/{user}/repos")
+        Call<List<Repository>> getUserRepositories(@Path("user") String userName);
 
     }
 
