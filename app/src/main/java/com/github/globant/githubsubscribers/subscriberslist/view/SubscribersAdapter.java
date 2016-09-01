@@ -1,0 +1,70 @@
+package com.github.globant.githubsubscribers.subscriberslist.view;
+
+import android.support.v7.widget.RecyclerView;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
+
+import com.github.globant.githubsubscribers.R;
+import com.github.globant.githubsubscribers.commons.models.Subscriber;
+import com.squareup.picasso.Picasso;
+
+import java.util.ArrayList;
+import java.util.List;
+
+/**
+ * Adapter class that puts data of subscribers list provided by a service
+ *
+ * @author juan.herrera
+ * @author edwin.cobos
+ * @since 29/08/2016
+ */
+public class SubscribersAdapter extends RecyclerView.Adapter<SubscribersAdapter.SubscriberViewHolder> {
+
+    private List<Subscriber> subscriberList;
+
+    public SubscribersAdapter() {
+        this.subscriberList = new ArrayList<>();
+    }
+
+    @Override
+    public SubscriberViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
+        View itemView = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.row_subscriber, viewGroup, false);
+        return new SubscriberViewHolder(itemView);
+    }
+
+    @Override
+    public void onBindViewHolder(SubscriberViewHolder viewHolder, int position) {
+        viewHolder.onBind(subscriberList.get(position));
+    }
+
+    @Override
+    public int getItemCount() {
+        return this.subscriberList.size();
+    }
+
+    public void setItems(List<Subscriber> subscriberList) {
+        this.subscriberList.clear();
+        this.subscriberList.addAll(subscriberList);
+        notifyDataSetChanged();
+    }
+
+    public class SubscriberViewHolder extends RecyclerView.ViewHolder {
+
+        private ImageView image;
+        private TextView text;
+
+        public SubscriberViewHolder(View itemView) {
+            super(itemView);
+            image = (ImageView) itemView.findViewById(R.id.img_avatar_subscriber);
+            text = (TextView) itemView.findViewById(R.id.txt_login_subscriber);
+        }
+
+        public void onBind(Subscriber item) {
+            text.setText(item.getLogin());
+            Picasso.with(image.getContext()).load(item.getAvataUrl()).into(image);
+        }
+    }
+}
