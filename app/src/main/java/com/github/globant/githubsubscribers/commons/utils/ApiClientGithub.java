@@ -36,7 +36,7 @@ public class ApiClientGithub {
      */
     public interface GithubApiInterface {
 
-        @GET("repos/octokit/octokit.rb/subscribers")
+        @GET("repos/googlesamples/android-architecture/subscribers")
         Call<List<Subscriber>> getSubscribers();
 
     }
