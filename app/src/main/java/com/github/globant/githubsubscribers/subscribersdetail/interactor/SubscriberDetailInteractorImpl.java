@@ -1,7 +1,10 @@
 package com.github.globant.githubsubscribers.subscribersdetail.interactor;
 
+import com.github.globant.githubsubscribers.commons.models.Repository;
 import com.github.globant.githubsubscribers.commons.models.User;
 import com.github.globant.githubsubscribers.commons.utils.ApiClientGithub;
+
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -22,12 +25,29 @@ public class SubscriberDetailInteractorImpl implements SubscriberDetailInteracto
             @Override
             public void onResponse(Call<User> call, Response<User> response) {
                 User userItem = response.body();
-                listener.onFinished(userItem);
+                listener.onFinishedUser(userItem);
             }
 
             @Override
             public void onFailure(Call<User> call, Throwable t) {
-                listener.onFailure(t.getMessage());
+                listener.onFailureUser(t.getMessage());
+            }
+        });
+    }
+
+    @Override
+    public void getUserRepositoryData(final OnFinishedListener listener, String userName) {
+        Call<List<Repository>> call = ApiClientGithub.getApiService().getUserRepositories(userName);
+        call.enqueue(new Callback<List<Repository>>() {
+            @Override
+            public void onResponse(Call<List<Repository>> call, Response<List<Repository>> response) {
+                List<Repository> repositoryList = response.body();
+                listener.onFinishedRepository(repositoryList);
+            }
+
+            @Override
+            public void onFailure(Call<List<Repository>> call, Throwable t) {
+                listener.onFailureRepository(t.getMessage());
             }
         });
     }

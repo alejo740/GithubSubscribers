@@ -14,4 +14,6 @@ public interface SubscriberDetailPresenter {
     void onDestroy();
 
     void getUser(String userName);
+
+    void getRepositoryList(String userName);
 }

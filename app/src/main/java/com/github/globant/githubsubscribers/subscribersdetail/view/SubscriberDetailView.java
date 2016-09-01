@@ -1,6 +1,5 @@
 package com.github.globant.githubsubscribers.subscribersdetail.view;
 
-
 import com.github.globant.githubsubscribers.commons.models.Repository;
 import com.github.globant.githubsubscribers.commons.models.User;
 
@@ -16,8 +15,9 @@ public interface SubscriberDetailView {
 
     void showSubscriberDetails(User userInfo);
 
-    void showSubscriberRepositories(List<Repository> repositories);
+    void showSubscriberUserRepositories(List<Repository> repositoryList);
 
-    void showSubscribersError();
+    void showUserError();
 
+    void showRepositoryError();
 }

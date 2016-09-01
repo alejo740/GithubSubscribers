@@ -89,10 +89,16 @@ public class SubscriberDetailFragment extends Fragment implements SubscriberDeta
     public void onResume() {
         super.onResume();
         presenter.getUser(userNameArg);
+        presenter.getRepositoryList(userNameArg);
     }
 
     @Override
-    public void showSubscribersError() {
+    public void showUserError() {
+        Toast.makeText(getContext(), R.string.api_client_error, Toast.LENGTH_LONG).show();
+    }
+
+    @Override
+    public void showRepositoryError() {
         Toast.makeText(getContext(), R.string.api_client_error, Toast.LENGTH_LONG).show();
     }
 
@@ -108,7 +114,7 @@ public class SubscriberDetailFragment extends Fragment implements SubscriberDeta
     }
 
     @Override
-    public void showSubscriberRepositories(List<Repository> repositories) {
+    public void showSubscriberUserRepositories(List<Repository> repositories) {
         repositoriesAdapter.setItems(repositories);
     }
 }

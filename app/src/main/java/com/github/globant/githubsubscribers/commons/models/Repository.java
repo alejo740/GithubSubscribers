@@ -151,6 +151,7 @@ public class Repository {
                       boolean hasIssues, boolean hasDownloads, boolean hasWiki, boolean hasPages, int forksCount,
                       String mirrorUrl, int openIssuesCount, int forks, int openIssues, int watchers,
                       String defaultBranch) {
+
         this.id = id;
         this.name = name;
         this.fullName = fullName;
@@ -487,4 +488,5 @@ public class Repository {
     public String getDefaultBranch() {
         return defaultBranch;
     }
+
 }
