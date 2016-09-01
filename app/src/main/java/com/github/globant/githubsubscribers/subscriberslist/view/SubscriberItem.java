@@ -41,6 +41,10 @@ public class SubscriberItem extends RelativeLayout {
         text = (TextView) findViewById(R.id.txt_login_subscriber);
     }
 
+    public String getUserName() {
+        return text.getText().toString();
+    }
+
     public void onBind(Subscriber item) {
         text.setText(item.getLogin());
         Picasso.with(getContext()).load(item.getAvataUrl()).into(image);

@@ -19,11 +19,10 @@ import java.util.List;
 public class SubscribersAdapter extends RecyclerView.Adapter<SubscribersAdapter.SubscriberViewHolder> {
 
     private List<Subscriber> subscriberList;
-    private Context context;
+    private ItemClickListener clickListener;
 
-    public SubscribersAdapter(Context context){
+    public SubscribersAdapter() {
         this.subscriberList = new ArrayList<>();
-        this.context = context;
     }
 
     @Override
@@ -42,25 +41,38 @@ public class SubscribersAdapter extends RecyclerView.Adapter<SubscribersAdapter.
         return this.subscriberList.size();
     }
 
-    public void setItems(List<Subscriber> subscriberList){
+    public void setClickListener(ItemClickListener itemClickListener) {
+        this.clickListener = itemClickListener;
+    }
+
+    public void setItems(List<Subscriber> subscriberList) {
         this.subscriberList.clear();
         this.subscriberList.addAll(subscriberList);
         notifyDataSetChanged();
     }
 
-    public class SubscriberViewHolder extends RecyclerView.ViewHolder {
-
+    public class SubscriberViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         SubscriberItem item;
 
         public SubscriberViewHolder(View itemView) {
-
             super(itemView);
             item = (SubscriberItem) itemView;
+            itemView.setOnClickListener(this);
         }
-
 
         public void onBind(Subscriber item) {
             this.item.onBind(item);
         }
+
+        @Override
+        public void onClick(View view) {
+            if (clickListener != null) {
+                clickListener.onClickItemList((SubscriberItem) view, getAdapterPosition());
+            }
+        }
+    }
+
+    public interface ItemClickListener {
+        void onClickItemList(SubscriberItem view, int position);
     }
 }

@@ -25,7 +25,7 @@ public class SubscriberDetailPresenterImpl implements SubscriberDetailPresenter,
 
     @Override
     public void onFinished(User userItem) {
-        view.showSubscriberUser(userItem);
+        view.showSubscriberDetails(userItem);
     }
 
     @Override

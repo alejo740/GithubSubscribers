@@ -12,8 +12,6 @@ import java.util.List;
  */
 public interface SubscribersListView {
 
-    void navigateToUserDetail();
-
     void showSubscribersList(List<Subscriber> subscriberList);
 
 }
