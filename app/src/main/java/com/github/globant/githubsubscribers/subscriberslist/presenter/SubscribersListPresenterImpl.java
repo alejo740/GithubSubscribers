@@ -26,11 +26,6 @@ public class SubscribersListPresenterImpl implements SubscribersListPresenter, S
     }
 
     @Override
-    public void onResume() {
-
-    }
-
-    @Override
     public void onDestroy() {
         view = null;
     }

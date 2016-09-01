@@ -63,6 +63,12 @@ public class SubscribersListFragment extends Fragment implements SubscribersList
     }
 
     @Override
+    public void onDestroy() {
+        super.onDestroy();
+        presenter.onDestroy();
+    }
+
+    @Override
     public void showSubscribersList(List<Subscriber> subscriberList) {
         subscribersAdapter.setItems(subscriberList);
         swipeLayout.setRefreshing(false);

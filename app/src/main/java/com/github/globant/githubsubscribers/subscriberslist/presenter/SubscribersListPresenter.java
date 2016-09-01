@@ -8,8 +8,6 @@ package com.github.globant.githubsubscribers.subscriberslist.presenter;
  */
 public interface SubscribersListPresenter {
 
-    void onResume();
-
     void onDestroy();
 
     void getSubscribersList();
