@@ -22,7 +22,7 @@ import java.util.List;
 public class SubscriberRepositoriesAdapter extends RecyclerView.Adapter<SubscriberRepositoriesAdapter.SubscriberDetailViewHolder> {
 
     private List<Repository> repositoryList;
-    private ItemClickListener clickListener;
+    private ItemRepoClickListener clickListener;
 
     public SubscriberRepositoriesAdapter() {
         this.repositoryList = new ArrayList<>();
@@ -44,7 +44,7 @@ public class SubscriberRepositoriesAdapter extends RecyclerView.Adapter<Subscrib
         return repositoryList.size();
     }
 
-    public void setClickListener(ItemClickListener itemClickListener) {
+    public void setClickListener(ItemRepoClickListener itemClickListener) {
         this.clickListener = itemClickListener;
     }
 
@@ -62,6 +62,7 @@ public class SubscriberRepositoriesAdapter extends RecyclerView.Adapter<Subscrib
         public SubscriberDetailViewHolder(View itemView) {
             super(itemView);
             text = (TextView) itemView.findViewById(R.id.txt_repository_subscriber);
+            itemView.setOnClickListener(this);
         }
 
         public void onBind(Repository item) {
@@ -81,7 +82,7 @@ public class SubscriberRepositoriesAdapter extends RecyclerView.Adapter<Subscrib
         }
     }
 
-    public interface ItemClickListener {
+    public interface ItemRepoClickListener {
         void onClickItemList(SubscriberDetailViewHolder view, int position);
     }
 }

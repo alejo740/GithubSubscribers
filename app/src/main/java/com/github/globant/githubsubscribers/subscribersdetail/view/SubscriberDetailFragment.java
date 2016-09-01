@@ -1,7 +1,5 @@
 package com.github.globant.githubsubscribers.subscribersdetail.view;
 
-import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -29,7 +27,7 @@ import java.util.List;
  * @author juan.herrera
  * @since 31/08/2016
  */
-public class SubscriberDetailFragment extends Fragment implements SubscriberDetailView, SubscriberRepositoriesAdapter.ItemClickListener{
+public class SubscriberDetailFragment extends Fragment implements SubscriberDetailView, SubscriberRepositoriesAdapter.ItemRepoClickListener, View.OnClickListener {
 
     private static final String ARG_USERNAME = "ARG_USERNAME";
     private String userNameArg;
@@ -42,6 +40,7 @@ public class SubscriberDetailFragment extends Fragment implements SubscriberDeta
     private TextView profileFollowersCounter;
     private TextView profileFollowingCounter;
     private TextView profileReposCounter;
+    private String profileHtmlUrl;
     private SubscriberRepositoriesAdapter repositoriesAdapter;
 
     private SubscriberDetailPresenter presenter;
@@ -75,6 +74,7 @@ public class SubscriberDetailFragment extends Fragment implements SubscriberDeta
 
         profileImage = (ImageView) viewFragment.findViewById(R.id.img_avatar_subscriber_detail);
         profileFullName = (TextView) viewFragment.findViewById(R.id.txt_full_name_subscriber_detail);
+        profileFullName.setOnClickListener(this);
         profileUserName = (TextView) viewFragment.findViewById(R.id.txt_user_name_subscriber_detail);
         profileCompany = (TextView) viewFragment.findViewById(R.id.txt_company_subscriber_detail);
         profileLocation = (TextView) viewFragment.findViewById(R.id.txt_location_subscriber_detail);
@@ -115,6 +115,7 @@ public class SubscriberDetailFragment extends Fragment implements SubscriberDeta
         profileFollowingCounter.setText(String.valueOf(userInfo.getFollowing()));
         profileFollowersCounter.setText(String.valueOf(userInfo.getFollowers()));
         profileReposCounter.setText(String.valueOf(userInfo.getPublicRepos()));
+        profileHtmlUrl = userInfo.getHtmlUrl();
     }
 
     @Override
@@ -125,7 +126,13 @@ public class SubscriberDetailFragment extends Fragment implements SubscriberDeta
     @Override
     public void onClickItemList(SubscriberRepositoriesAdapter.SubscriberDetailViewHolder view, int position) {
         String repoUrl = view.getRepoUrl();
-        Utils.debugLog("Click Repo "+repoUrl);
-        //TODO: Launch browser opening the Repo URL
+        Utils.openLinkInBrowser(getContext(), repoUrl);
+    }
+
+    @Override
+    public void onClick(View v) {
+        if (profileHtmlUrl != null) {
+            Utils.openLinkInBrowser(getContext(), profileHtmlUrl);
+        }
     }
 }
