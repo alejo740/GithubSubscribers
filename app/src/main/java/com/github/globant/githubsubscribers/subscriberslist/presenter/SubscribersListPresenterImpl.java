@@ -1,10 +1,9 @@
 package com.github.globant.githubsubscribers.subscriberslist.presenter;
 
 import com.github.globant.githubsubscribers.commons.models.Subscriber;
-import com.github.globant.githubsubscribers.commons.utils.Utils;
-import com.github.globant.githubsubscribers.subscriberslist.view.SubscribersListView;
 import com.github.globant.githubsubscribers.subscriberslist.interactor.SubscribersListInteractor;
 import com.github.globant.githubsubscribers.subscriberslist.interactor.SubscribersListInteractorImpl;
+import com.github.globant.githubsubscribers.subscriberslist.view.SubscribersListView;
 
 import java.util.List;
 
@@ -26,11 +25,6 @@ public class SubscribersListPresenterImpl implements SubscribersListPresenter, S
     }
 
     @Override
-    public void onResume() {
-
-    }
-
-    @Override
     public void onDestroy() {
         view = null;
     }
@@ -41,12 +35,13 @@ public class SubscribersListPresenterImpl implements SubscribersListPresenter, S
     }
 
     @Override
-    public void onFinished(List<Subscriber> listItems) {
+    public void onResponse(List<Subscriber> listItems) {
         view.showSubscribersList(listItems);
     }
 
     @Override
-    public void onFailed(String errorMessage) {
-        Utils.debugLog(errorMessage);
+    public void onFailure(String errorMessage) {
+        //TODO: Manage message errors
+        view.showSubscribersError();
     }
 }

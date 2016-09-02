@@ -47,22 +47,17 @@ public class SubscriberDetailPresenterImpl implements SubscriberDetailPresenter,
     }
 
     @Override
-    public void onResume() {
-
-    }
-
-    @Override
     public void onDestroy() {
         view = null;
     }
 
     @Override
     public void getUser(String userName) {
-        interactor.getUserData(this, userName);
+        interactor.getUserData(userName, this);
     }
 
     @Override
     public void getRepositoryList(String userName) {
-        interactor.getUserRepositoryData(this, userName);
+        interactor.getUserRepositoryData(userName, this);
     }
 }

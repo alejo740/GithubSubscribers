@@ -25,12 +25,12 @@ public class SubscribersListInteractorImpl implements SubscribersListInteractor 
             @Override
             public void onResponse(Call<List<Subscriber>> call, Response<List<Subscriber>> response) {
                 List<Subscriber> userList = response.body();
-                listener.onFinished(userList);
+                listener.onResponse(userList);
             }
 
             @Override
             public void onFailure(Call<List<Subscriber>> call, Throwable t) {
-                listener.onFailed(t.getMessage());
+                listener.onFailure(t.getMessage());
             }
         });
     }

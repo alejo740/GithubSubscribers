@@ -46,6 +46,9 @@ public class SubscriberDetailFragment extends Fragment implements SubscriberDeta
                              Bundle savedInstanceState) {
         View viewFragment = inflater.inflate(R.layout.fragment_subscribers_detail, container, false);
         presenter = new SubscriberDetailPresenterImpl(this);
+        /*TODO
+            The next line is a hardcoded for testing purposes
+         */
         presenter.getUser("keyboardsurfer");
         imgAvatar = (ImageView) viewFragment.findViewById(R.id.img_avatar_subscriber_detail);
         txtFullName = (TextView) viewFragment.findViewById(R.id.txt_full_name_subscriber_detail);
@@ -70,16 +73,18 @@ public class SubscriberDetailFragment extends Fragment implements SubscriberDeta
 
     @Override
     public void showSubscriberUserRepository(List<Repository> repositoryList) {
-
+        //TODO This method will show a repository list from service
     }
 
     @Override
     public void showUserError() {
+        //TODO Manage error messages
         Toast.makeText(getContext(), R.string.api_client_error, Toast.LENGTH_LONG).show();
     }
 
     @Override
     public void showRepositoryError() {
+        //TODO Manage error messages
         Toast.makeText(getContext(), R.string.api_client_error, Toast.LENGTH_LONG).show();
     }
 }
