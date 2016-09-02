@@ -25,6 +25,7 @@ public class SubscribersAdapter extends RecyclerView.Adapter<SubscribersAdapter.
 
     private List<Subscriber> subscriberList;
 
+
     public SubscribersAdapter() {
         this.subscriberList = new ArrayList<>();
     }

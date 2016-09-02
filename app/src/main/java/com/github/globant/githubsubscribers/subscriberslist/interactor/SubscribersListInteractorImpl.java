@@ -2,6 +2,7 @@ package com.github.globant.githubsubscribers.subscriberslist.interactor;
 
 import com.github.globant.githubsubscribers.commons.models.Subscriber;
 import com.github.globant.githubsubscribers.commons.utils.ApiClientGithub;
+import com.github.globant.githubsubscribers.subscriberslist.interactor.SubscribersListInteractor;
 
 import java.util.List;
 

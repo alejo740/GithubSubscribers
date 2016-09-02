@@ -1,7 +1,6 @@
 package com.github.globant.githubsubscribers.subscriberslist.presenter;
 
 import com.github.globant.githubsubscribers.commons.models.Subscriber;
-import com.github.globant.githubsubscribers.commons.utils.Utils;
 import com.github.globant.githubsubscribers.subscriberslist.interactor.SubscribersListInteractor;
 import com.github.globant.githubsubscribers.subscriberslist.interactor.SubscribersListInteractorImpl;
 import com.github.globant.githubsubscribers.subscriberslist.view.SubscribersListView;

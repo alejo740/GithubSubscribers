@@ -11,5 +11,6 @@
     <dimen name="img_view_layout">80dp</dimen>
     <dimen name="img_view_margin">20dp</dimen>
     <dimen name="txt_view_margin">10dp</dimen>
+    <dimen name="txt_size_subsciber_detail">10sp</dimen>
     <dimen name="splash_title_size">25sp</dimen>
 </resources>
