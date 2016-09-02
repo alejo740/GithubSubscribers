@@ -48,10 +48,6 @@ public class RepositoryAdapter extends RecyclerView.Adapter<RepositoryAdapter.Su
         this.clickListener = itemClickListener;
     }
 
-    public Repository getRepository(int index){
-        return repositoryList.get(index);
-    }
-
     public void setItems(List<Repository> repositoryList) {
         this.repositoryList.clear();
         this.repositoryList.addAll(repositoryList);
@@ -75,12 +71,12 @@ public class RepositoryAdapter extends RecyclerView.Adapter<RepositoryAdapter.Su
         @Override
         public void onClick(View v) {
             if (clickListener != null) {
-                clickListener.onClickItemList(this);
+                clickListener.onClickItemList(repositoryList.get(getAdapterPosition()));
             }
         }
     }
 
     public interface OnRepositoryItemClickListener {
-        void onClickItemList(SubscriberDetailViewHolder view);
+        void onClickItemList(Repository view);
     }
 }
