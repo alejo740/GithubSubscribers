@@ -72,6 +72,12 @@ public class SubscriberDetailFragment extends Fragment implements SubscriberDeta
     }
 
     @Override
+    public void onDestroy() {
+        super.onDestroy();
+        presenter.onDestroy();
+    }
+
+    @Override
     public void showSubscriberUserRepository(List<Repository> repositoryList) {
         //TODO This method will show a repository list from service
     }
