@@ -96,13 +96,20 @@ public class SubscriberDetailFragment extends Fragment implements SubscriberDeta
         presenter.getRepositoryList(userNameArg);
     }
 
+    public void onDestroy() {
+        super.onDestroy();
+        presenter.onDestroy();
+    }
+
     @Override
     public void showUserError() {
+        //TODO Manage error messages
         Toast.makeText(getContext(), R.string.api_client_error, Toast.LENGTH_LONG).show();
     }
 
     @Override
     public void showRepositoryError() {
+        //TODO Manage error messages
         Toast.makeText(getContext(), R.string.api_client_error, Toast.LENGTH_LONG).show();
     }
 

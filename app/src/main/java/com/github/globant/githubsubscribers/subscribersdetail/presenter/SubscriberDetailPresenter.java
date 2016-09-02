@@ -9,8 +9,6 @@ package com.github.globant.githubsubscribers.subscribersdetail.presenter;
  */
 public interface SubscriberDetailPresenter {
 
-    void onResume();
-
     void onDestroy();
 
     void getUser(String userName);

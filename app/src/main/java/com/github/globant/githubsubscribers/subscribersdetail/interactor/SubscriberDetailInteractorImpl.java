@@ -19,7 +19,7 @@ import retrofit2.Response;
  */
 public class SubscriberDetailInteractorImpl implements SubscriberDetailInteractor {
     @Override
-    public void getUserData(final OnFinishedListener listener, String userName) {
+    public void getUserData(String userName, final OnFinishedListener listener) {
         Call<User> call = ApiClientGithub.getApiService().getSubscriberUser(userName);
         call.enqueue(new Callback<User>() {
             @Override
@@ -36,7 +36,7 @@ public class SubscriberDetailInteractorImpl implements SubscriberDetailInteracto
     }
 
     @Override
-    public void getUserRepositoryData(final OnFinishedListener listener, String userName) {
+    public void getUserRepositoryData(String userName, final OnFinishedListener listener) {
         Call<List<Repository>> call = ApiClientGithub.getApiService().getUserRepositories(userName);
         call.enqueue(new Callback<List<Repository>>() {
             @Override

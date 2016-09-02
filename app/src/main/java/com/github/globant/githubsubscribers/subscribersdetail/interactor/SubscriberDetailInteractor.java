@@ -20,7 +20,7 @@ public interface SubscriberDetailInteractor {
         void onFailureRepository(String errorMessage);
     }
 
-    void getUserData(OnFinishedListener listener, String userName);
+    void getUserData(String userName, OnFinishedListener listener);
 
-    void getUserRepositoryData(OnFinishedListener listener, String userName);
+    void getUserRepositoryData(String userName, OnFinishedListener listener);
 }

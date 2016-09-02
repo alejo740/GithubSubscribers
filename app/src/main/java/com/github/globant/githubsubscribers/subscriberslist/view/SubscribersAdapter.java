@@ -57,6 +57,7 @@ public class SubscribersAdapter extends RecyclerView.Adapter<SubscribersAdapter.
     }
 
     public class SubscriberViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+
         private ImageView image;
         private TextView text;
 

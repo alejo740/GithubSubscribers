@@ -1,10 +1,6 @@
 package com.github.globant.githubsubscribers.subscriberslist.view;
 
-import com.github.globant.githubsubscribers.subscriberslist.presenter.SubscribersListPresenter;
 import android.content.Context;
-import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -13,9 +9,6 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
-import com.github.globant.githubsubscribers.R;
-import com.github.globant.githubsubscribers.commons.models.Subscriber;
 import android.widget.Toast;
 
 import com.github.globant.githubsubscribers.R;
@@ -42,7 +35,7 @@ public class SubscribersListFragment extends Fragment implements SubscribersList
     private OnFragmentInteractionListener mListener;
 
     @Override
-    public void onCreate(Bundle savedInstanceState){
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         subscribersAdapter = new SubscribersAdapter();
     }
@@ -83,7 +76,7 @@ public class SubscribersListFragment extends Fragment implements SubscribersList
         mListener.onChangeToSubscriberDetails(view.getUserName());
     }
 
-    private void loadSubscribers(){
+    private void loadSubscribers() {
         swipeLayout.setRefreshing(true);
         presenter.getSubscribersList();
     }
@@ -122,6 +115,7 @@ public class SubscribersListFragment extends Fragment implements SubscribersList
      * fragment to allow an interaction in this fragment to be communicated
      * to the activity and potentially other fragments contained in that
      * activity.
+     * <p/>
      * See the Android Training lesson <a href=
      * "http://developer.android.com/training/basics/fragments/communicating.html"
      * >Communicating with Other Fragments</a> for more information.
