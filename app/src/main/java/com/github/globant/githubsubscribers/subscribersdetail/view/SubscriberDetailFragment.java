@@ -27,10 +27,10 @@ import java.util.List;
  * @author juan.herrera
  * @since 31/08/2016
  */
-public class SubscriberDetailFragment extends Fragment implements SubscriberDetailView, RepositoryAdapter.ItemRepoClickListener, View.OnClickListener {
+public class SubscriberDetailFragment extends Fragment implements SubscriberDetailView, RepositoryAdapter.OnRepositoryItemClickListener, View.OnClickListener {
 
     private static final String ARG_USERNAME = "ARG_USERNAME";
-    private String userNameArg;
+    private String userNameParam;
 
     private ImageView profileImage;
     private TextView profileFullName;
@@ -52,17 +52,17 @@ public class SubscriberDetailFragment extends Fragment implements SubscriberDeta
         repositoriesAdapter = new RepositoryAdapter();
     }
 
-    public static SubscriberDetailFragment newInstance(String param1) {
+    public static SubscriberDetailFragment newInstance(String userName) {
         SubscriberDetailFragment fragment = new SubscriberDetailFragment();
         Bundle args = new Bundle();
-        args.putString(ARG_USERNAME, param1);
+        args.putString(ARG_USERNAME, userName);
         fragment.setArguments(args);
         return fragment;
     }
 
     private void loadArgs() {
         if (getArguments() != null) {
-            userNameArg = getArguments().getString(ARG_USERNAME);
+            userNameParam = getArguments().getString(ARG_USERNAME);
         }
     }
 
@@ -92,8 +92,8 @@ public class SubscriberDetailFragment extends Fragment implements SubscriberDeta
     @Override
     public void onResume() {
         super.onResume();
-        presenter.getUser(userNameArg);
-        presenter.getRepositoryList(userNameArg);
+        presenter.getUser(userNameParam);
+        presenter.getRepositoryList(userNameParam);
     }
 
     public void onDestroy() {
@@ -131,8 +131,9 @@ public class SubscriberDetailFragment extends Fragment implements SubscriberDeta
     }
 
     @Override
-    public void onClickItemList(RepositoryAdapter.SubscriberDetailViewHolder view, int position) {
-        String repoUrl = view.getRepoUrl();
+    public void onClickItemList(RepositoryAdapter.SubscriberDetailViewHolder view) {
+        Repository repo = repositoriesAdapter.getRepository(view.getAdapterPosition());
+        String repoUrl = repo.getHtmlUrl();
         Utils.openLinkInBrowser(getContext(), repoUrl);
     }
 
