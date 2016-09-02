@@ -9,19 +9,19 @@ import com.google.gson.annotations.SerializedName;
  * @since 30/08/2016
  */
 public class User {
-    String login;
-    int id;
+    private String login;
+    private int id;
     @SerializedName("avatar_url")
-    String avatarUrl;
+    private String avatarUrl;
     @SerializedName("html_url")
-    String htmlUrl;
-    String name;
-    String company;
-    String location;
+    private String htmlUrl;
+    private String name;
+    private String company;
+    private String location;
     @SerializedName("public_repos")
-    int publicRepos;
-    int followers;
-    int following;
+    private int publicRepos;
+    private int followers;
+    private int following;
 
     public User(String login, int id, String avatarUrl, String htmlUrl, String name,
                 String company, String location, int publicRepos, int followers, int following) {
