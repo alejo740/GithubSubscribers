@@ -12,6 +12,8 @@ public class Constants {
 
     public static final String DEBUG_PREFIX = "GITHUBAPI";
     public static final boolean DEBUG_LOGS = true;
+    public final static String TAG_UNDERLINE_OPEN = "<u>";
+    public final static String TAG_UNDERLINE_CLOSE = "</u>";
     public final static String MESSAGE_FAILED_SERVICE = "The sevice is not available";
 
     public static final long SPLASH_DELAY = 3000;

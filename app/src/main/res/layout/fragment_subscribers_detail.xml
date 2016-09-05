@@ -29,7 +29,7 @@
             android:layout_toRightOf="@+id/img_avatar_subscriber_detail"
             android:ellipsize="end"
             android:maxLines="@integer/max_lines_text_view_full_name"
-            android:textColor="@color/touch_text_color"
+            android:textColor="@drawable/touch_text_color"
             android:textSize="@dimen/title_size_subscriber_detail"
             android:textStyle="bold" />
 
