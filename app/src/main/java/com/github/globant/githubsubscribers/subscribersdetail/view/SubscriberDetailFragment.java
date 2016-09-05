@@ -131,8 +131,8 @@ public class SubscriberDetailFragment extends Fragment implements SubscriberDeta
     }
 
     @Override
-    public void onClickItemList(Repository view) {
-        String repoUrl = view.getHtmlUrl();
+    public void onClickItemList(Repository repository) {
+        String repoUrl = repository.getHtmlUrl();
         Utils.openLinkInBrowser(getContext(), repoUrl);
     }
 

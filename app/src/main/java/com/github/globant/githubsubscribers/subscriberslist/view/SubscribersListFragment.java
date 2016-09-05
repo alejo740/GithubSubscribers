@@ -72,8 +72,8 @@ public class SubscribersListFragment extends Fragment implements SubscribersList
     }
 
     @Override
-    public void onClickItemList(Subscriber view) {
-        String userName = view.getLogin();
+    public void onClickItemList(Subscriber subscriber) {
+        String userName = subscriber.getLogin();
         mListener.onChangeToSubscriberDetails(userName);
     }
 

@@ -22,7 +22,7 @@ import java.util.List;
 public class RepositoryAdapter extends RecyclerView.Adapter<RepositoryAdapter.RepositoryViewHolder> {
 
     public interface OnRepositoryItemClickListener {
-        void onClickItemList(Repository view);
+        void onClickItemList(Repository repository);
     }
 
     private List<Repository> repositoryList;
