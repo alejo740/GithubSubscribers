@@ -2,4 +2,7 @@
     <string name="app_name">Github Subscribers</string>
     <string name="splash_title">GITHUB SUBSCRIBERS</string>
     <string name="api_client_error">Connection problems</string>
+    <string name="followers">Followers:</string>
+    <string name="following">Following:</string>
+    <string name="repositories">Repositories:</string>
 </resources>

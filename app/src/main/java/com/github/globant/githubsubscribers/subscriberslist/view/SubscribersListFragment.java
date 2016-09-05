@@ -1,6 +1,6 @@
 package com.github.globant.githubsubscribers.subscriberslist.view;
 
-import android.net.Uri;
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -26,14 +26,16 @@ import java.util.List;
  * @since 29/08/2016
  */
 
-public class SubscribersListFragment extends Fragment implements SubscribersListView, SwipeRefreshLayout.OnRefreshListener {
+public class SubscribersListFragment extends Fragment implements SubscribersListView, SwipeRefreshLayout.OnRefreshListener, SubscribersAdapter.ItemClickListener {
 
     private SubscribersListPresenter presenter;
     private SubscribersAdapter subscribersAdapter;
     private SwipeRefreshLayout swipeLayout;
 
+    private OnFragmentInteractionListener mListener;
+
     @Override
-    public void onCreate(Bundle savedInstanceState){
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         subscribersAdapter = new SubscribersAdapter();
     }
@@ -48,10 +50,34 @@ public class SubscribersListFragment extends Fragment implements SubscribersList
         RecyclerView recyclerViewSubscribers = (RecyclerView) viewFragment.findViewById(R.id.recycler_view_subscribers);
         recyclerViewSubscribers.setLayoutManager(new LinearLayoutManager(getActivity()));
         recyclerViewSubscribers.setAdapter(subscribersAdapter);
+        subscribersAdapter.setClickListener(this);
         return viewFragment;
     }
 
-    private void loadSubscribers(){
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        if (context instanceof OnFragmentInteractionListener) {
+            mListener = (OnFragmentInteractionListener) context;
+        } else {
+            throw new RuntimeException(context.toString()
+                    + " must implement OnFragmentInteractionListener");
+        }
+    }
+
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        mListener = null;
+    }
+
+    @Override
+    public void onClickItemList(Subscriber subscriber) {
+        String userName = subscriber.getLogin();
+        mListener.onChangeToSubscriberDetails(userName);
+    }
+
+    private void loadSubscribers() {
         swipeLayout.setRefreshing(true);
         presenter.getSubscribersList();
     }
@@ -80,11 +106,6 @@ public class SubscribersListFragment extends Fragment implements SubscribersList
     }
 
     @Override
-    public void navigateToUserDetail() {
-        //TODO: Action to change to User details fragment
-    }
-
-    @Override
     public void onRefresh() {
         Utils.debugLog("onREFRESHING");
         loadSubscribers();
@@ -102,7 +123,7 @@ public class SubscribersListFragment extends Fragment implements SubscribersList
      */
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
-        void onFragmentInteraction(Uri uri);
+        void onChangeToSubscriberDetails(String userName);
     }
 
 }

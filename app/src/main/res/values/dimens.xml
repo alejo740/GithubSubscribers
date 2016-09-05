@@ -9,8 +9,13 @@
     <dimen name="txt_size_text_view">18sp</dimen>
     <dimen name="relative_layout_margin">20dp</dimen>
     <dimen name="img_view_layout">80dp</dimen>
-    <dimen name="img_view_margin">20dp</dimen>
+    <dimen name="img_view_margin">15dp</dimen>
+    <dimen name="img_view_margin_right">6dp</dimen>
+    <dimen name="img_view_profile_layout">140dp</dimen>
     <dimen name="txt_view_margin">10dp</dimen>
+    <dimen name="txt_size_subscriber_detail">15sp</dimen>
+    <dimen name="title_size_subscriber_detail">32sp</dimen>
+    <dimen name="margin_left_counters_subscriber_profile">5dp</dimen>
     <dimen name="txt_size_subsciber_detail">10sp</dimen>
     <dimen name="splash_title_size">25sp</dimen>
 </resources>

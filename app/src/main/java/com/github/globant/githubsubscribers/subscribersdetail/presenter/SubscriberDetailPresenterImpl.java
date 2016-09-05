@@ -26,9 +26,8 @@ public class SubscriberDetailPresenterImpl implements SubscriberDetailPresenter,
         this.interactor = new SubscriberDetailInteractorImpl();
     }
 
-    @Override
     public void onFinishedUser(User userItem) {
-        view.showSubscriberUser(userItem);
+        view.showSubscriberDetails(userItem);
     }
 
     @Override
@@ -38,7 +37,7 @@ public class SubscriberDetailPresenterImpl implements SubscriberDetailPresenter,
 
     @Override
     public void onFinishedRepository(List<Repository> repositoryList) {
-        view.showSubscriberUserRepository(repositoryList);
+        view.showSubscriberUserRepositories(repositoryList);
     }
 
     @Override

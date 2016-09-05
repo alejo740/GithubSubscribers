@@ -8,14 +8,15 @@ import java.util.List;
 /**
  * Interface SubscriberDetailView that represents the View class(Activity)
  *
+ * @author edwin.cobos
  * @author juan.herrera
- * @since 30/08/2016
+ * @since 31/08/2016
  */
 public interface SubscriberDetailView {
 
-    void showSubscriberUser(User subscriberUser);
+    void showSubscriberDetails(User userInfo);
 
-    void showSubscriberUserRepository(List<Repository> repositoryList);
+    void showSubscriberUserRepositories(List<Repository> repositoryList);
 
     void showUserError();
 
