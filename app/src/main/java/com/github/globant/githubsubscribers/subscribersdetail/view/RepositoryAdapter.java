@@ -19,7 +19,7 @@ import java.util.List;
  * @author edwin.cobos
  * @since 31/08/2016
  */
-public class RepositoryAdapter extends RecyclerView.Adapter<RepositoryAdapter.SubscriberDetailViewHolder> {
+public class RepositoryAdapter extends RecyclerView.Adapter<RepositoryAdapter.RepositoryViewHolder> {
 
     private List<Repository> repositoryList;
     private OnRepositoryItemClickListener clickListener;
@@ -29,13 +29,13 @@ public class RepositoryAdapter extends RecyclerView.Adapter<RepositoryAdapter.Su
     }
 
     @Override
-    public SubscriberDetailViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
+    public RepositoryViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
         View itemView = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.row_repository, viewGroup, false);
-        return new SubscriberDetailViewHolder(itemView);
+        return new RepositoryViewHolder(itemView);
     }
 
     @Override
-    public void onBindViewHolder(SubscriberDetailViewHolder viewHolder, int position) {
+    public void onBindViewHolder(RepositoryViewHolder viewHolder, int position) {
         viewHolder.onBind(repositoryList.get(position));
     }
 
@@ -54,11 +54,11 @@ public class RepositoryAdapter extends RecyclerView.Adapter<RepositoryAdapter.Su
         notifyDataSetChanged();
     }
 
-    public class SubscriberDetailViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+    public class RepositoryViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         private TextView text;
 
-        public SubscriberDetailViewHolder(View itemView) {
+        public RepositoryViewHolder(View itemView) {
             super(itemView);
             text = (TextView) itemView.findViewById(R.id.txt_repository_subscriber);
             itemView.setOnClickListener(this);

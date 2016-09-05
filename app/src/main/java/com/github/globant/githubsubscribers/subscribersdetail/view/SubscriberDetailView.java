@@ -9,6 +9,7 @@ import java.util.List;
  * Interface SubscriberDetailView that represents the View class(Activity)
  *
  * @author edwin.cobos
+ * @author juan.herrera
  * @since 31/08/2016
  */
 public interface SubscriberDetailView {
