@@ -28,7 +28,7 @@
             android:layout_toEndOf="@+id/img_avatar_subscriber_detail"
             android:layout_toRightOf="@+id/img_avatar_subscriber_detail"
             android:ellipsize="end"
-            android:maxLines="@integer/MAX_LINES_TEXTVIEW_FULL_NAME"
+            android:maxLines="@integer/max_lines_text_view_full_name"
             android:textColor="@color/touch_text_color"
             android:textSize="@dimen/title_size_subscriber_detail"
             android:textStyle="bold" />
@@ -41,7 +41,7 @@
             android:layout_alignStart="@+id/txt_full_name_subscriber_detail"
             android:layout_below="@+id/txt_full_name_subscriber_detail"
             android:ellipsize="end"
-            android:maxLines="@integer/MAX_LINES_OTHER_TEXTVIEW"
+            android:maxLines="@integer/max_lines_other_text_view"
             android:textColor="@color/colorTextProfile"
             android:textSize="@dimen/txt_size_subscriber_detail" />
 
@@ -53,7 +53,7 @@
             android:layout_alignStart="@+id/txt_user_name_subscriber_detail"
             android:layout_below="@+id/txt_user_name_subscriber_detail"
             android:ellipsize="end"
-            android:maxLines="@integer/MAX_LINES_OTHER_TEXTVIEW"
+            android:maxLines="@integer/max_lines_other_text_view"
             android:textColor="@color/colorTextProfile"
             android:textSize="@dimen/txt_size_subscriber_detail" />
 
@@ -65,7 +65,7 @@
             android:layout_alignStart="@+id/txt_company_subscriber_detail"
             android:layout_below="@+id/txt_company_subscriber_detail"
             android:ellipsize="end"
-            android:maxLines="@integer/MAX_LINES_OTHER_TEXTVIEW"
+            android:maxLines="@integer/max_lines_other_text_view"
             android:textColor="@color/colorTextProfile"
             android:textSize="@dimen/txt_size_subscriber_detail" />
 

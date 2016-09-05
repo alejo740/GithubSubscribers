@@ -6,7 +6,6 @@
     android:layout_marginLeft="@dimen/layout_margin_row_card"
     android:layout_marginRight="@dimen/layout_margin_row_card"
     android:layout_marginTop="@dimen/layout_margin_row_card"
-    android:background="@drawable/text_link_selector_bg"
     card_view:cardCornerRadius="@dimen/card_corner_radius">
 
     <RelativeLayout
