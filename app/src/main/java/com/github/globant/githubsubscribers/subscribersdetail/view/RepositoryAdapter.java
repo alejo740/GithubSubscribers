@@ -21,6 +21,10 @@ import java.util.List;
  */
 public class RepositoryAdapter extends RecyclerView.Adapter<RepositoryAdapter.RepositoryViewHolder> {
 
+    public interface OnRepositoryItemClickListener {
+        void onClickItemList(Repository view);
+    }
+
     private List<Repository> repositoryList;
     private OnRepositoryItemClickListener clickListener;
 
@@ -74,9 +78,5 @@ public class RepositoryAdapter extends RecyclerView.Adapter<RepositoryAdapter.Re
                 clickListener.onClickItemList(repositoryList.get(getAdapterPosition()));
             }
         }
-    }
-
-    public interface OnRepositoryItemClickListener {
-        void onClickItemList(Repository view);
     }
 }

@@ -25,7 +25,7 @@ import java.util.List;
 public class SubscribersAdapter extends RecyclerView.Adapter<SubscribersAdapter.SubscriberViewHolder> {
 
     public interface ItemClickListener {
-        void onClickItemList(SubscriberViewHolder view, int position);
+        void onClickItemList(Subscriber view);
     }
 
     private List<Subscriber> subscriberList;
@@ -85,7 +85,7 @@ public class SubscribersAdapter extends RecyclerView.Adapter<SubscribersAdapter.
         @Override
         public void onClick(View view) {
             if (clickListener != null) {
-                clickListener.onClickItemList(this, getAdapterPosition());
+                clickListener.onClickItemList(subscriberList.get(getAdapterPosition()));
             }
         }
     }
