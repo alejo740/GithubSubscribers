@@ -22,7 +22,7 @@ import java.util.List;
 public class RepositoryAdapter extends RecyclerView.Adapter<RepositoryAdapter.SubscriberDetailViewHolder> {
 
     private List<Repository> repositoryList;
-    private ItemRepoClickListener clickListener;
+    private OnRepositoryItemClickListener clickListener;
 
     public RepositoryAdapter() {
         this.repositoryList = new ArrayList<>();
@@ -44,7 +44,7 @@ public class RepositoryAdapter extends RecyclerView.Adapter<RepositoryAdapter.Su
         return repositoryList.size();
     }
 
-    public void setClickListener(ItemRepoClickListener itemClickListener) {
+    public void setClickListener(OnRepositoryItemClickListener itemClickListener) {
         this.clickListener = itemClickListener;
     }
 
@@ -57,7 +57,6 @@ public class RepositoryAdapter extends RecyclerView.Adapter<RepositoryAdapter.Su
     public class SubscriberDetailViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         private TextView text;
-        private String repoUrl;
 
         public SubscriberDetailViewHolder(View itemView) {
             super(itemView);
@@ -67,22 +66,17 @@ public class RepositoryAdapter extends RecyclerView.Adapter<RepositoryAdapter.Su
 
         public void onBind(Repository item) {
             text.setText(item.getFullName());
-            repoUrl = item.getHtmlUrl();
-        }
-
-        public String getRepoUrl() {
-            return repoUrl;
         }
 
         @Override
         public void onClick(View v) {
             if (clickListener != null) {
-                clickListener.onClickItemList(this, getAdapterPosition());
+                clickListener.onClickItemList(repositoryList.get(getAdapterPosition()));
             }
         }
     }
 
-    public interface ItemRepoClickListener {
-        void onClickItemList(SubscriberDetailViewHolder view, int position);
+    public interface OnRepositoryItemClickListener {
+        void onClickItemList(Repository view);
     }
 }

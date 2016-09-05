@@ -16,9 +16,9 @@
             android:layout_width="@dimen/img_view_profile_layout"
             android:layout_height="@dimen/img_view_profile_layout"
             android:layout_marginLeft="@dimen/img_view_margin"
-            android:layout_marginTop="@dimen/img_view_margin"
             android:layout_marginRight="@dimen/img_view_margin_right"
-            android:background="@color/cardview_light_background"/>
+            android:layout_marginTop="@dimen/img_view_margin"
+            android:background="@color/cardview_light_background" />
 
         <TextView
             android:id="@+id/txt_full_name_subscriber_detail"
@@ -38,8 +38,8 @@
             android:layout_alignLeft="@+id/txt_full_name_subscriber_detail"
             android:layout_alignStart="@+id/txt_full_name_subscriber_detail"
             android:layout_below="@+id/txt_full_name_subscriber_detail"
-            android:textSize="@dimen/txt_size_subscriber_detail"
-            android:textColor="@color/colorTextProfile" />
+            android:textColor="@color/colorTextProfile"
+            android:textSize="@dimen/txt_size_subscriber_detail" />
 
         <TextView
             android:id="@+id/txt_company_subscriber_detail"
@@ -48,8 +48,8 @@
             android:layout_alignLeft="@+id/txt_user_name_subscriber_detail"
             android:layout_alignStart="@+id/txt_user_name_subscriber_detail"
             android:layout_below="@+id/txt_user_name_subscriber_detail"
-            android:textSize="@dimen/txt_size_subscriber_detail"
-            android:textColor="@color/colorTextProfile" />
+            android:textColor="@color/colorTextProfile"
+            android:textSize="@dimen/txt_size_subscriber_detail" />
 
         <TextView
             android:id="@+id/txt_location_subscriber_detail"
@@ -58,8 +58,8 @@
             android:layout_alignLeft="@+id/txt_company_subscriber_detail"
             android:layout_alignStart="@+id/txt_company_subscriber_detail"
             android:layout_below="@+id/txt_company_subscriber_detail"
-            android:textSize="@dimen/txt_size_subscriber_detail"
-            android:textColor="@color/colorTextProfile" />
+            android:textColor="@color/colorTextProfile"
+            android:textSize="@dimen/txt_size_subscriber_detail" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -78,17 +78,17 @@
                     android:id="@+id/label_followers_counter_subscriber_detail"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="@dimen/txt_size_subscriber_detail"
                     android:text="@string/followers"
-                    android:textColor="@color/colorTextProfile" />
+                    android:textColor="@color/colorTextProfile"
+                    android:textSize="@dimen/txt_size_subscriber_detail" />
 
                 <TextView
                     android:id="@+id/txt_followers_counter_subscriber_detail"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/margin_left_counters_subscriber_profile"
-                    android:textSize="@dimen/txt_size_subscriber_detail"
-                    android:textColor="@color/colorTextProfile" />
+                    android:textColor="@color/colorTextProfile"
+                    android:textSize="@dimen/txt_size_subscriber_detail" />
             </LinearLayout>
 
             <LinearLayout
@@ -101,17 +101,17 @@
                     android:id="@+id/label_following_counter_subscriber_detail"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="@dimen/txt_size_subscriber_detail"
                     android:text="@string/following"
-                    android:textColor="@color/colorTextProfile" />
+                    android:textColor="@color/colorTextProfile"
+                    android:textSize="@dimen/txt_size_subscriber_detail" />
 
                 <TextView
                     android:id="@+id/txt_following_counter_subscriber_detail"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="@dimen/txt_size_subscriber_detail"
                     android:layout_marginLeft="@dimen/margin_left_counters_subscriber_profile"
-                    android:textColor="@color/colorTextProfile" />
+                    android:textColor="@color/colorTextProfile"
+                    android:textSize="@dimen/txt_size_subscriber_detail" />
             </LinearLayout>
 
             <LinearLayout
@@ -124,17 +124,17 @@
                     android:id="@+id/label_repos_counter_subscriber_detail"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="@dimen/txt_size_subscriber_detail"
                     android:text="@string/repositories"
-                    android:textColor="@color/colorTextProfile" />
+                    android:textColor="@color/colorTextProfile"
+                    android:textSize="@dimen/txt_size_subscriber_detail" />
 
                 <TextView
                     android:id="@+id/txt_repos_counter_subscriber_detail"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="@dimen/txt_size_subscriber_detail"
                     android:layout_marginLeft="@dimen/margin_left_counters_subscriber_profile"
-                    android:textColor="@color/colorTextProfile" />
+                    android:textColor="@color/colorTextProfile"
+                    android:textSize="@dimen/txt_size_subscriber_detail" />
             </LinearLayout>
 
         </LinearLayout>

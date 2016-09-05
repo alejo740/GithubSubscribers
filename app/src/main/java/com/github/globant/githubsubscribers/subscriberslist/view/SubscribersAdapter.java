@@ -9,6 +9,7 @@ import android.widget.TextView;
 
 import com.github.globant.githubsubscribers.R;
 import com.github.globant.githubsubscribers.commons.models.Subscriber;
+import com.github.globant.githubsubscribers.commons.utils.Utils;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
