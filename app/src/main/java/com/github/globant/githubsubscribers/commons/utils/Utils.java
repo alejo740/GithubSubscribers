@@ -3,6 +3,7 @@ package com.github.globant.githubsubscribers.commons.utils;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 
 /**
@@ -25,4 +26,9 @@ public class Utils {
         context.startActivity(intent);
     }
 
+    public static void hideBar(AppCompatActivity activity) {
+        if(activity.getSupportActionBar() != null) {
+            activity.getSupportActionBar().hide();
+        }
+    }
 }

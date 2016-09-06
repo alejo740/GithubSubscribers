@@ -8,6 +8,7 @@ import android.widget.ImageView;
 
 import com.github.globant.githubsubscribers.R;
 import com.github.globant.githubsubscribers.commons.utils.Constants;
+import com.github.globant.githubsubscribers.commons.utils.Utils;
 import com.github.globant.githubsubscribers.main.MainActivity;
 
 /**
@@ -23,6 +24,7 @@ public class SplashActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
+        Utils.hideBar(this);
         if (savedInstanceState == null) {
             startAnimation();
             startTimer();
