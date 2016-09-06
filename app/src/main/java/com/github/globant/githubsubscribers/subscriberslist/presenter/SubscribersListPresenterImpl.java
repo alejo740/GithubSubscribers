@@ -1,6 +1,8 @@
 package com.github.globant.githubsubscribers.subscriberslist.presenter;
 
 import com.github.globant.githubsubscribers.commons.models.Subscriber;
+import com.github.globant.githubsubscribers.commons.utils.ErrorMessagesHelper;
+import com.github.globant.githubsubscribers.commons.utils.Utils;
 import com.github.globant.githubsubscribers.subscriberslist.interactor.SubscribersListInteractor;
 import com.github.globant.githubsubscribers.subscriberslist.interactor.SubscribersListInteractorImpl;
 import com.github.globant.githubsubscribers.subscriberslist.view.SubscribersListView;
@@ -27,6 +29,7 @@ public class SubscribersListPresenterImpl implements SubscribersListPresenter, S
     @Override
     public void onDestroy() {
         view = null;
+        interactor.onCancelRequest();
     }
 
     @Override
@@ -36,12 +39,17 @@ public class SubscribersListPresenterImpl implements SubscribersListPresenter, S
 
     @Override
     public void onResponse(List<Subscriber> listItems) {
-        view.showSubscribersList(listItems);
+        if (view != null) {
+            view.showSubscribersList(listItems);
+        }
     }
 
     @Override
-    public void onFailure(String errorMessage) {
-        //TODO: Manage message errors
-        view.showSubscribersError();
+    public void onFailure(String errorMessage, ErrorMessagesHelper.TypeError type) {
+        Utils.debugLog(errorMessage);
+        int messageId = ErrorMessagesHelper.getMessage(type);
+        if (messageId > 0 && view != null) {
+            view.showSubscribersError(messageId);
+        }
     }
 }

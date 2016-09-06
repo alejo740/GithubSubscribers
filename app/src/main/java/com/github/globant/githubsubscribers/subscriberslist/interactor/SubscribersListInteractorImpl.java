@@ -2,8 +2,10 @@ package com.github.globant.githubsubscribers.subscriberslist.interactor;
 
 import com.github.globant.githubsubscribers.commons.models.Subscriber;
 import com.github.globant.githubsubscribers.commons.utils.ApiClientGithub;
+import com.github.globant.githubsubscribers.commons.utils.ErrorMessagesHelper;
 import com.github.globant.githubsubscribers.subscriberslist.interactor.SubscribersListInteractor;
 
+import java.io.IOException;
 import java.util.List;
 
 import retrofit2.Call;
@@ -18,20 +20,39 @@ import retrofit2.Response;
  * @since 19/08/2016
  */
 public class SubscribersListInteractorImpl implements SubscribersListInteractor {
+    Call<List<Subscriber>> call;
+
     @Override
     public void getSubscribersDataList(final OnFinishedListener listener) {
-        Call<List<Subscriber>> call = ApiClientGithub.getApiService().getSubscribers();
+        call = ApiClientGithub.getApiService().getSubscribers();
         call.enqueue(new Callback<List<Subscriber>>() {
             @Override
             public void onResponse(Call<List<Subscriber>> call, Response<List<Subscriber>> response) {
-                List<Subscriber> userList = response.body();
-                listener.onResponse(userList);
+                if (response.isSuccessful()) {
+                    List<Subscriber> userList = response.body();
+                    listener.onResponse(userList);
+                } else {
+                    try {
+                        listener.onFailure(response.errorBody().string(), ErrorMessagesHelper.TypeError.BAD_ANSWER);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
             }
 
             @Override
             public void onFailure(Call<List<Subscriber>> call, Throwable t) {
-                listener.onFailure(t.getMessage());
+                if (call.isCanceled()) {
+                    listener.onFailure(t.getMessage(), ErrorMessagesHelper.TypeError.REQUEST_CANCELLED);
+                } else {
+                    listener.onFailure(t.getMessage(), ErrorMessagesHelper.TypeError.NO_CONNECTION);
+                }
             }
         });
+    }
+
+    @Override
+    public void onCancelRequest() {
+        call.cancel();
     }
 }

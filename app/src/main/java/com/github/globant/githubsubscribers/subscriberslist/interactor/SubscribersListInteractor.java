@@ -1,6 +1,7 @@
 package com.github.globant.githubsubscribers.subscriberslist.interactor;
 
 import com.github.globant.githubsubscribers.commons.models.Subscriber;
+import com.github.globant.githubsubscribers.commons.utils.ErrorMessagesHelper;
 
 import java.util.List;
 
@@ -14,9 +15,12 @@ import java.util.List;
 public interface SubscribersListInteractor {
     interface OnFinishedListener {
         void onResponse(List<Subscriber> listItems);
-        void onFailure(String errorMessage);
+
+        void onFailure(String errorMessage, ErrorMessagesHelper.TypeError type);
     }
 
     void getSubscribersDataList(OnFinishedListener listener);
+
+    void onCancelRequest();
 
 }
