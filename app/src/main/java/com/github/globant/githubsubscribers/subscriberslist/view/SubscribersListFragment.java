@@ -56,11 +56,9 @@ public class SubscribersListFragment extends Fragment implements SubscribersList
             recyclerViewSubscribers.setLayoutManager(new LinearLayoutManager(getActivity()));
             recyclerViewSubscribers.setAdapter(subscribersAdapter);
             subscribersAdapter.setClickListener(this);
-            Utils.debugLog("onCREATEView 00");
         }else{
             Utils.debugLog(savedInstanceState.toString());
         }
-        Utils.debugLog("onCREATEView");
         return viewFragment;
     }
 
@@ -100,7 +98,6 @@ public class SubscribersListFragment extends Fragment implements SubscribersList
 
     @Override
     public void onDestroy() {
-        Utils.debugLog("onDESTROY");
         super.onDestroy();
         presenter.onDestroy();
     }
@@ -118,7 +115,6 @@ public class SubscribersListFragment extends Fragment implements SubscribersList
 
     @Override
     public void onRefresh() {
-        Utils.debugLog("onREFRESHING");
         loadSubscribers();
     }
 
