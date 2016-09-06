@@ -3,6 +3,8 @@ package com.github.globant.githubsubscribers.commons.utils;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
+import android.text.SpannableString;
+import android.text.style.UnderlineSpan;
 import android.util.Log;
 
 /**
@@ -17,6 +19,12 @@ public class Utils {
         if (Constants.DEBUG_LOGS) {
             Log.i(Constants.DEBUG_PREFIX, msg);
         }
+    }
+
+    public static SpannableString setUnderlineText(String someText) {
+        SpannableString spanString = new SpannableString(someText);
+        spanString.setSpan(new UnderlineSpan(), 0, spanString.length(), 0);
+        return spanString;
     }
 
     public static void openLinkInBrowser(Context context, String url) {
