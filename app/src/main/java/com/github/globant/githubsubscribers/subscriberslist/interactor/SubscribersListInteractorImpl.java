@@ -2,6 +2,7 @@ package com.github.globant.githubsubscribers.subscriberslist.interactor;
 
 import com.github.globant.githubsubscribers.commons.models.Subscriber;
 import com.github.globant.githubsubscribers.commons.utils.ApiClientGithub;
+import com.github.globant.githubsubscribers.commons.utils.Constants;
 import com.github.globant.githubsubscribers.subscriberslist.interactor.SubscribersListInteractor;
 
 import java.util.List;
@@ -24,8 +25,13 @@ public class SubscribersListInteractorImpl implements SubscribersListInteractor 
         call.enqueue(new Callback<List<Subscriber>>() {
             @Override
             public void onResponse(Call<List<Subscriber>> call, Response<List<Subscriber>> response) {
-                List<Subscriber> userList = response.body();
-                listener.onResponse(userList);
+                if(response.isSuccessful()){
+                    List<Subscriber> userList = response.body();
+                    listener.onResponse(userList);
+                }
+                else{
+                    listener.onFailure(Constants.MESSAGE_FAILED_SERVICE);
+                }
             }
 
             @Override

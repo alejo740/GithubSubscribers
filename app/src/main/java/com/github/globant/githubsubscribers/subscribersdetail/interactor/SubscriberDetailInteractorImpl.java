@@ -3,6 +3,7 @@ package com.github.globant.githubsubscribers.subscribersdetail.interactor;
 import com.github.globant.githubsubscribers.commons.models.Repository;
 import com.github.globant.githubsubscribers.commons.models.User;
 import com.github.globant.githubsubscribers.commons.utils.ApiClientGithub;
+import com.github.globant.githubsubscribers.commons.utils.Constants;
 
 import java.util.List;
 
@@ -24,8 +25,12 @@ public class SubscriberDetailInteractorImpl implements SubscriberDetailInteracto
         call.enqueue(new Callback<User>() {
             @Override
             public void onResponse(Call<User> call, Response<User> response) {
-                User userItem = response.body();
-                listener.onFinishedUser(userItem);
+                if (response.isSuccessful()) {
+                    User userItem = response.body();
+                    listener.onFinishedUser(userItem);
+                } else {
+                    listener.onFailureUser(Constants.MESSAGE_FAILED_SERVICE);
+                }
             }
 
             @Override
@@ -41,8 +46,13 @@ public class SubscriberDetailInteractorImpl implements SubscriberDetailInteracto
         call.enqueue(new Callback<List<Repository>>() {
             @Override
             public void onResponse(Call<List<Repository>> call, Response<List<Repository>> response) {
-                List<Repository> repositoryList = response.body();
-                listener.onFinishedRepository(repositoryList);
+                if (response.isSuccessful()) {
+                    List<Repository> repositoryList = response.body();
+                    listener.onFinishedRepository(repositoryList);
+                } else {
+                    listener.onFailureRepository(Constants.MESSAGE_FAILED_SERVICE);
+                }
+
             }
 
             @Override
