@@ -14,12 +14,6 @@ import android.util.Log;
  */
 public class Utils {
 
-    public static void debugLog(String msg) {
-        if (Constants.DEBUG_LOGS) {
-            Log.i(Constants.DEBUG_PREFIX, msg);
-        }
-    }
-
     public static void openLinkInBrowser(Context context, String url) {
         Intent intent = new Intent(Intent.ACTION_VIEW);
         intent.setData(Uri.parse(url));

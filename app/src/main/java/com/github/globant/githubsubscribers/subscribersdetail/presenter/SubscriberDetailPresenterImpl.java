@@ -42,7 +42,7 @@ public class SubscriberDetailPresenterImpl implements SubscriberDetailPresenter,
         if (messageId > 0 && view != null) {
             view.showUserError(messageId);
         }
-        Debug.e(this.getClass().getEnclosingMethod().getName()+": "+errorMessage);
+        Debug.e(this.getClass().getEnclosingMethod().getName() + ": " + errorMessage);
     }
 
     @Override
@@ -51,7 +51,7 @@ public class SubscriberDetailPresenterImpl implements SubscriberDetailPresenter,
         if (messageId > 0 && view != null) {
             view.showUserError(messageId);
         }
-        Debug.e(this.getClass().getEnclosingMethod().getName()+": "+errorMessage);
+        Debug.e(this.getClass().getEnclosingMethod().getName() + ": " + errorMessage);
     }
 
     @Override

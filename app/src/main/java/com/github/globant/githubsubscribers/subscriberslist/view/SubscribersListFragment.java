@@ -13,6 +13,7 @@ import android.widget.Toast;
 
 import com.github.globant.githubsubscribers.R;
 import com.github.globant.githubsubscribers.commons.models.Subscriber;
+import com.github.globant.githubsubscribers.commons.utils.Debug;
 import com.github.globant.githubsubscribers.commons.utils.Utils;
 import com.github.globant.githubsubscribers.subscriberslist.presenter.SubscribersListPresenter;
 import com.github.globant.githubsubscribers.subscriberslist.presenter.SubscribersListPresenterImpl;
@@ -57,7 +58,7 @@ public class SubscribersListFragment extends Fragment implements SubscribersList
             recyclerViewSubscribers.setAdapter(subscribersAdapter);
             subscribersAdapter.setClickListener(this);
         }else{
-            Utils.debugLog(savedInstanceState.toString());
+            Debug.i(savedInstanceState.toString());
         }
         return viewFragment;
     }

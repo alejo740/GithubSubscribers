@@ -3,7 +3,6 @@ package com.github.globant.githubsubscribers.subscriberslist.interactor;
 import com.github.globant.githubsubscribers.commons.models.Subscriber;
 import com.github.globant.githubsubscribers.commons.utils.ApiClientGithub;
 import com.github.globant.githubsubscribers.commons.utils.ErrorMessagesHelper;
-import com.github.globant.githubsubscribers.subscriberslist.interactor.SubscribersListInteractor;
 
 import java.io.IOException;
 import java.util.List;
@@ -53,6 +52,8 @@ public class SubscribersListInteractorImpl implements SubscribersListInteractor 
 
     @Override
     public void onCancelRequest() {
-        call.cancel();
+        if (call.isExecuted()) {
+            call.cancel();
+        }
     }
 }
