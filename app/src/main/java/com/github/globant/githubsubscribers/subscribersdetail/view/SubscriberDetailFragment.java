@@ -14,6 +14,7 @@ import android.widget.Toast;
 import com.github.globant.githubsubscribers.R;
 import com.github.globant.githubsubscribers.commons.models.Repository;
 import com.github.globant.githubsubscribers.commons.models.User;
+import com.github.globant.githubsubscribers.commons.utils.Debug;
 import com.github.globant.githubsubscribers.commons.utils.Utils;
 import com.github.globant.githubsubscribers.subscribersdetail.presenter.SubscriberDetailPresenter;
 import com.github.globant.githubsubscribers.subscribersdetail.presenter.SubscriberDetailPresenterImpl;
@@ -91,6 +92,8 @@ public class SubscriberDetailFragment extends Fragment implements SubscriberDeta
             recyclerViewSubscribers.setLayoutManager(new LinearLayoutManager(getActivity()));
             recyclerViewSubscribers.setAdapter(repositoriesAdapter);
             repositoriesAdapter.setClickListener(this);
+        } else {
+            Debug.i(savedInstanceState.toString());
         }
         return viewFragment;
     }
@@ -114,7 +117,7 @@ public class SubscriberDetailFragment extends Fragment implements SubscriberDeta
 
     public void showSubscriberDetails(User userInfo) {
         Picasso.with(getContext()).load(userInfo.getAvatarUrl()).into(profileImage);
-        profileFullName.setText(userInfo.getName());
+        profileFullName.setText(Utils.setUnderlineText(userInfo.getName()));
         profileUserName.setText(userInfo.getLogin());
         profileCompany.setText(userInfo.getCompany());
         profileLocation.setText(userInfo.getLocation());
