@@ -2,6 +2,7 @@ package com.github.globant.githubsubscribers.subscribersdetail.interactor;
 
 import com.github.globant.githubsubscribers.commons.models.Repository;
 import com.github.globant.githubsubscribers.commons.models.User;
+import com.github.globant.githubsubscribers.commons.utils.ErrorMessagesHelper;
 
 import java.util.List;
 
@@ -14,13 +15,19 @@ import java.util.List;
 public interface SubscriberDetailInteractor {
     interface OnFinishedListener {
         void onFinishedUser(User userItem);
-        void onFailureUser(String errorMessage);
+
+        void onFailureUser(String errorMessage, ErrorMessagesHelper.TypeError type);
 
         void onFinishedRepository(List<Repository> repositoryList);
-        void onFailureRepository(String errorMessage);
+
+        void onFailureRepository(String errorMessage, ErrorMessagesHelper.TypeError type);
     }
 
     void getUserData(String userName, OnFinishedListener listener);
 
     void getUserRepositoryData(String userName, OnFinishedListener listener);
+
+    void onCancelRequestUser();
+
+    void onCancelRequestRepository();
 }

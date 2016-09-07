@@ -3,7 +3,9 @@ package com.github.globant.githubsubscribers.subscribersdetail.interactor;
 import com.github.globant.githubsubscribers.commons.models.Repository;
 import com.github.globant.githubsubscribers.commons.models.User;
 import com.github.globant.githubsubscribers.commons.utils.ApiClientGithub;
+import com.github.globant.githubsubscribers.commons.utils.ErrorMessagesHelper;
 
+import java.io.IOException;
 import java.util.List;
 
 import retrofit2.Call;
@@ -18,37 +20,78 @@ import retrofit2.Response;
  * @since 30/08/2016
  */
 public class SubscriberDetailInteractorImpl implements SubscriberDetailInteractor {
+    private Call<User> callUser;
+    private Call<List<Repository>> callRepositories;
+
     @Override
     public void getUserData(String userName, final OnFinishedListener listener) {
-        Call<User> call = ApiClientGithub.getApiService().getSubscriberUser(userName);
-        call.enqueue(new Callback<User>() {
+        callUser = ApiClientGithub.getApiService().getSubscriberUser(userName);
+        callUser.enqueue(new Callback<User>() {
             @Override
             public void onResponse(Call<User> call, Response<User> response) {
-                User userItem = response.body();
-                listener.onFinishedUser(userItem);
+                if (response.isSuccessful()) {
+                    User userItem = response.body();
+                    listener.onFinishedUser(userItem);
+                } else {
+                    try {
+                        listener.onFailureUser(response.errorBody().string(), ErrorMessagesHelper.TypeError.BAD_ANSWER);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
             }
 
             @Override
             public void onFailure(Call<User> call, Throwable t) {
-                listener.onFailureUser(t.getMessage());
+                if (call.isCanceled()) {
+                    listener.onFailureUser(t.getMessage(), ErrorMessagesHelper.TypeError.REQUEST_CANCELLED);
+                } else {
+                    listener.onFailureUser(t.getMessage(), ErrorMessagesHelper.TypeError.NO_CONNECTION);
+                }
             }
         });
     }
 
     @Override
     public void getUserRepositoryData(String userName, final OnFinishedListener listener) {
-        Call<List<Repository>> call = ApiClientGithub.getApiService().getUserRepositories(userName);
-        call.enqueue(new Callback<List<Repository>>() {
+        callRepositories = ApiClientGithub.getApiService().getUserRepositories(userName);
+        callRepositories.enqueue(new Callback<List<Repository>>() {
             @Override
             public void onResponse(Call<List<Repository>> call, Response<List<Repository>> response) {
-                List<Repository> repositoryList = response.body();
-                listener.onFinishedRepository(repositoryList);
+                if (response.isSuccessful()) {
+                    List<Repository> repositoryList = response.body();
+                    listener.onFinishedRepository(repositoryList);
+                } else {
+                    try {
+                        listener.onFailureRepository(response.errorBody().string(), ErrorMessagesHelper.TypeError.BAD_ANSWER);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
             }
 
             @Override
             public void onFailure(Call<List<Repository>> call, Throwable t) {
-                listener.onFailureRepository(t.getMessage());
+                if (call.isCanceled()) {
+                    listener.onFailureRepository(t.getMessage(), ErrorMessagesHelper.TypeError.REQUEST_CANCELLED);
+                } else {
+                    listener.onFailureRepository(t.getMessage(), ErrorMessagesHelper.TypeError.NO_CONNECTION);
+                }
             }
         });
+    }
+
+    @Override
+    public void onCancelRequestUser() {
+        if (callUser.isExecuted()) {
+            callUser.cancel();
+        }
+    }
+
+    @Override
+    public void onCancelRequestRepository() {
+        if (callRepositories.isExecuted()) {
+            callRepositories.cancel();
+        }
     }
 }

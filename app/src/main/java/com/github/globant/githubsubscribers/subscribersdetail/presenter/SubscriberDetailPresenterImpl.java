@@ -2,7 +2,8 @@ package com.github.globant.githubsubscribers.subscribersdetail.presenter;
 
 import com.github.globant.githubsubscribers.commons.models.Repository;
 import com.github.globant.githubsubscribers.commons.models.User;
-import com.github.globant.githubsubscribers.commons.utils.Utils;
+import com.github.globant.githubsubscribers.commons.utils.Debug;
+import com.github.globant.githubsubscribers.commons.utils.ErrorMessagesHelper;
 import com.github.globant.githubsubscribers.subscribersdetail.interactor.SubscriberDetailInteractor;
 import com.github.globant.githubsubscribers.subscribersdetail.interactor.SubscriberDetailInteractorImpl;
 import com.github.globant.githubsubscribers.subscribersdetail.view.SubscriberDetailView;
@@ -31,23 +32,33 @@ public class SubscriberDetailPresenterImpl implements SubscriberDetailPresenter,
     }
 
     @Override
-    public void onFailureUser(String errorMessage) {
-        view.showUserError();
-    }
-
-    @Override
     public void onFinishedRepository(List<Repository> repositoryList) {
         view.showSubscriberUserRepositories(repositoryList);
     }
 
     @Override
-    public void onFailureRepository(String errorMessage) {
-        view.showRepositoryError();
+    public void onFailureUser(String errorMessage, ErrorMessagesHelper.TypeError type) {
+        int messageId = ErrorMessagesHelper.getMessage(type);
+        if (messageId > 0 && view != null) {
+            view.showUserError(messageId);
+        }
+        Debug.e(this.getClass().getEnclosingMethod().getName()+": "+errorMessage);
+    }
+
+    @Override
+    public void onFailureRepository(String errorMessage, ErrorMessagesHelper.TypeError type) {
+        int messageId = ErrorMessagesHelper.getMessage(type);
+        if (messageId > 0 && view != null) {
+            view.showUserError(messageId);
+        }
+        Debug.e(this.getClass().getEnclosingMethod().getName()+": "+errorMessage);
     }
 
     @Override
     public void onDestroy() {
         view = null;
+        interactor.onCancelRequestUser();
+        interactor.onCancelRequestRepository();
     }
 
     @Override

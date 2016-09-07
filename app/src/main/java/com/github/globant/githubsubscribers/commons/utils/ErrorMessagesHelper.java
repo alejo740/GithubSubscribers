@@ -29,14 +29,14 @@ public class ErrorMessagesHelper {
         int messageId;
         switch (error) {
             case BAD_ANSWER:
-                messageId = R.string.api_client_error;
+                messageId = R.string.api_client_error_bad_answer;
                 break;
             case REQUEST_CANCELLED:
-                messageId = -1;
+                messageId = R.string.api_client_error_request_cancel;
                 break;
             case NO_CONNECTION:
             default:
-                messageId = R.string.api_client_error;
+                messageId = R.string.api_client_error_no_connection;
                 break;
         }
         return messageId;
