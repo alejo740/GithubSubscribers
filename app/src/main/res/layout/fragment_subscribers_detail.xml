@@ -27,7 +27,9 @@
             android:layout_alignTop="@+id/img_avatar_subscriber_detail"
             android:layout_toEndOf="@+id/img_avatar_subscriber_detail"
             android:layout_toRightOf="@+id/img_avatar_subscriber_detail"
-            android:textColor="@color/colorTextProfile"
+            android:ellipsize="end"
+            android:maxLines="@integer/max_lines_text_view_full_name"
+            android:textColor="@drawable/touch_text_color"
             android:textSize="@dimen/title_size_subscriber_detail"
             android:textStyle="bold" />
 
@@ -38,6 +40,8 @@
             android:layout_alignLeft="@+id/txt_full_name_subscriber_detail"
             android:layout_alignStart="@+id/txt_full_name_subscriber_detail"
             android:layout_below="@+id/txt_full_name_subscriber_detail"
+            android:ellipsize="end"
+            android:maxLines="@integer/max_lines_other_text_view"
             android:textColor="@color/colorTextProfile"
             android:textSize="@dimen/txt_size_subscriber_detail" />
 
@@ -48,6 +52,8 @@
             android:layout_alignLeft="@+id/txt_user_name_subscriber_detail"
             android:layout_alignStart="@+id/txt_user_name_subscriber_detail"
             android:layout_below="@+id/txt_user_name_subscriber_detail"
+            android:ellipsize="end"
+            android:maxLines="@integer/max_lines_other_text_view"
             android:textColor="@color/colorTextProfile"
             android:textSize="@dimen/txt_size_subscriber_detail" />
 
@@ -58,6 +64,8 @@
             android:layout_alignLeft="@+id/txt_company_subscriber_detail"
             android:layout_alignStart="@+id/txt_company_subscriber_detail"
             android:layout_below="@+id/txt_company_subscriber_detail"
+            android:ellipsize="end"
+            android:maxLines="@integer/max_lines_other_text_view"
             android:textColor="@color/colorTextProfile"
             android:textSize="@dimen/txt_size_subscriber_detail" />
 
@@ -144,6 +152,7 @@
         android:id="@+id/list_repositories"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_margin="@dimen/margin_common"
         android:scrollbars="vertical" />
 
 

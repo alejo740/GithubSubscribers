@@ -1,0 +1,5 @@
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:color="@color/colorTextProfile" android:state_pressed="false" android:state_selected="false" />
+    <item android:color="@color/transparent_highlight" android:state_pressed="true" />
+    <item android:color="@color/transparent_highlight" android:state_pressed="false" android:state_selected="true" />
+</selector>
