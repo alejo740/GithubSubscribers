@@ -78,10 +78,6 @@ public class SubscribersAdapter extends RecyclerView.Adapter<SubscribersAdapter.
             Picasso.with(image.getContext()).load(item.getAvataUrl()).into(image);
         }
 
-        public String getUserName() {
-            return text.getText().toString();
-        }
-
         @Override
         public void onClick(View view) {
             if (clickListener != null) {

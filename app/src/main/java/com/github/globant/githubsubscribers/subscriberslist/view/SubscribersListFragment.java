@@ -31,26 +31,34 @@ public class SubscribersListFragment extends Fragment implements SubscribersList
     private SubscribersListPresenter presenter;
     private SubscribersAdapter subscribersAdapter;
     private SwipeRefreshLayout swipeLayout;
+    private View viewFragment;
 
     private OnFragmentInteractionListener mListener;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        subscribersAdapter = new SubscribersAdapter();
+        if (savedInstanceState == null) {
+            setRetainInstance(true);
+            subscribersAdapter = new SubscribersAdapter();
+            presenter = new SubscribersListPresenterImpl(this);
+        }
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View viewFragment = inflater.inflate(R.layout.fragment_subscribers_list, container, false);
-        swipeLayout = (SwipeRefreshLayout) viewFragment.findViewById(R.id.swipe_layout);
-        swipeLayout.setOnRefreshListener(this);
-        presenter = new SubscribersListPresenterImpl(this);
-        RecyclerView recyclerViewSubscribers = (RecyclerView) viewFragment.findViewById(R.id.recycler_view_subscribers);
-        recyclerViewSubscribers.setLayoutManager(new LinearLayoutManager(getActivity()));
-        recyclerViewSubscribers.setAdapter(subscribersAdapter);
-        subscribersAdapter.setClickListener(this);
+        if (savedInstanceState == null) {
+            viewFragment = inflater.inflate(R.layout.fragment_subscribers_list, container, false);
+            swipeLayout = (SwipeRefreshLayout) viewFragment.findViewById(R.id.swipe_layout);
+            swipeLayout.setOnRefreshListener(this);
+            RecyclerView recyclerViewSubscribers = (RecyclerView) viewFragment.findViewById(R.id.recycler_view_subscribers);
+            recyclerViewSubscribers.setLayoutManager(new LinearLayoutManager(getActivity()));
+            recyclerViewSubscribers.setAdapter(subscribersAdapter);
+            subscribersAdapter.setClickListener(this);
+        }else{
+            Utils.debugLog(savedInstanceState.toString());
+        }
         return viewFragment;
     }
 
@@ -107,7 +115,6 @@ public class SubscribersListFragment extends Fragment implements SubscribersList
 
     @Override
     public void onRefresh() {
-        Utils.debugLog("onREFRESHING");
         loadSubscribers();
     }
 
