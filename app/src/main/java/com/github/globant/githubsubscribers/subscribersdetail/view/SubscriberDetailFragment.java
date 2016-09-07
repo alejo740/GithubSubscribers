@@ -42,6 +42,7 @@ public class SubscriberDetailFragment extends Fragment implements SubscriberDeta
     private TextView profileReposCounter;
     private String profileHtmlUrl;
     private RepositoryAdapter repositoriesAdapter;
+    private View viewFragment;
 
     private SubscriberDetailPresenter presenter;
 
@@ -49,7 +50,11 @@ public class SubscriberDetailFragment extends Fragment implements SubscriberDeta
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         loadArgs();
-        repositoriesAdapter = new RepositoryAdapter();
+        if (savedInstanceState == null) {
+            setRetainInstance(true);
+            repositoriesAdapter = new RepositoryAdapter();
+            presenter = new SubscriberDetailPresenterImpl(this);
+        }
     }
 
     public static SubscriberDetailFragment newInstance(String userName) {
@@ -69,23 +74,24 @@ public class SubscriberDetailFragment extends Fragment implements SubscriberDeta
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View viewFragment = inflater.inflate(R.layout.fragment_subscribers_detail, container, false);
-        presenter = new SubscriberDetailPresenterImpl(this);
+        if (savedInstanceState == null) {
+            viewFragment = inflater.inflate(R.layout.fragment_subscribers_detail, container, false);
 
-        profileImage = (ImageView) viewFragment.findViewById(R.id.img_avatar_subscriber_detail);
-        profileFullName = (TextView) viewFragment.findViewById(R.id.txt_full_name_subscriber_detail);
-        profileFullName.setOnClickListener(this);
-        profileUserName = (TextView) viewFragment.findViewById(R.id.txt_user_name_subscriber_detail);
-        profileCompany = (TextView) viewFragment.findViewById(R.id.txt_company_subscriber_detail);
-        profileLocation = (TextView) viewFragment.findViewById(R.id.txt_location_subscriber_detail);
-        profileFollowingCounter = (TextView) viewFragment.findViewById(R.id.txt_following_counter_subscriber_detail);
-        profileFollowersCounter = (TextView) viewFragment.findViewById(R.id.txt_followers_counter_subscriber_detail);
-        profileReposCounter = (TextView) viewFragment.findViewById(R.id.txt_repos_counter_subscriber_detail);
+            profileImage = (ImageView) viewFragment.findViewById(R.id.img_avatar_subscriber_detail);
+            profileFullName = (TextView) viewFragment.findViewById(R.id.txt_full_name_subscriber_detail);
+            profileFullName.setOnClickListener(this);
+            profileUserName = (TextView) viewFragment.findViewById(R.id.txt_user_name_subscriber_detail);
+            profileCompany = (TextView) viewFragment.findViewById(R.id.txt_company_subscriber_detail);
+            profileLocation = (TextView) viewFragment.findViewById(R.id.txt_location_subscriber_detail);
+            profileFollowingCounter = (TextView) viewFragment.findViewById(R.id.txt_following_counter_subscriber_detail);
+            profileFollowersCounter = (TextView) viewFragment.findViewById(R.id.txt_followers_counter_subscriber_detail);
+            profileReposCounter = (TextView) viewFragment.findViewById(R.id.txt_repos_counter_subscriber_detail);
 
-        RecyclerView recyclerViewSubscribers = (RecyclerView) viewFragment.findViewById(R.id.list_repositories);
-        recyclerViewSubscribers.setLayoutManager(new LinearLayoutManager(getActivity()));
-        recyclerViewSubscribers.setAdapter(repositoriesAdapter);
-        repositoriesAdapter.setClickListener(this);
+            RecyclerView recyclerViewSubscribers = (RecyclerView) viewFragment.findViewById(R.id.list_repositories);
+            recyclerViewSubscribers.setLayoutManager(new LinearLayoutManager(getActivity()));
+            recyclerViewSubscribers.setAdapter(repositoriesAdapter);
+            repositoriesAdapter.setClickListener(this);
+        }
         return viewFragment;
     }
 
@@ -103,13 +109,11 @@ public class SubscriberDetailFragment extends Fragment implements SubscriberDeta
 
     @Override
     public void showUserError() {
-        //TODO Manage error messages
         Toast.makeText(getContext(), R.string.api_client_error, Toast.LENGTH_LONG).show();
     }
 
     @Override
     public void showRepositoryError() {
-        //TODO Manage error messages
         Toast.makeText(getContext(), R.string.api_client_error, Toast.LENGTH_LONG).show();
     }
 
