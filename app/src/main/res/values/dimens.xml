@@ -18,4 +18,5 @@
     <dimen name="margin_left_counters_subscriber_profile">5dp</dimen>
     <dimen name="txt_size_subsciber_detail">10sp</dimen>
     <dimen name="splash_title_size">25sp</dimen>
+    <dimen name="margin_botton_recycler_view">10dip</dimen>
 </resources>
