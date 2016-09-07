@@ -1,0 +1,4 @@
+<resources>
+    <integer name="max_lines_text_view_full_name">2</integer>
+    <integer name="max_lines_other_text_view">1</integer>
+</resources>
