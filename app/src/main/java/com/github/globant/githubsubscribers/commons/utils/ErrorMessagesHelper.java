@@ -32,7 +32,7 @@ public class ErrorMessagesHelper {
                 messageId = R.string.api_client_error_bad_answer;
                 break;
             case REQUEST_CANCELLED:
-                messageId = R.string.api_client_error_request_cancel;
+                messageId = R.string.api_client_error_request_cancelled;
                 break;
             case NO_CONNECTION:
             default:

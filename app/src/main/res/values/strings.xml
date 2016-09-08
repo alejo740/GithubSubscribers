@@ -1,9 +1,9 @@
 <resources>
     <string name="app_name">Github Subscribers</string>
     <string name="splash_title">GITHUB SUBSCRIBERS</string>
-    <string name="api_client_error_no_connection">Connection problems</string>
-    <string name="api_client_error_bad_answer">Server not responding</string>
-    <string name="api_client_error_request_cancel">Request cancel</string>
+    <string name="api_client_error_no_connection">We are having connections issues, please try again later</string>
+    <string name="api_client_error_bad_answer">Sorry, we are having issues. We are working so hard to solve this.</string>
+    <string name="api_client_error_request_cancelled">The request was cancelled</string>
     <string name="followers">Followers:</string>
     <string name="following">Following:</string>
     <string name="repositories">Repositories:</string>

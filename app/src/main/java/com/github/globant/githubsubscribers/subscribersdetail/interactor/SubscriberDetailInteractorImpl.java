@@ -3,6 +3,8 @@ package com.github.globant.githubsubscribers.subscribersdetail.interactor;
 import com.github.globant.githubsubscribers.commons.models.Repository;
 import com.github.globant.githubsubscribers.commons.models.User;
 import com.github.globant.githubsubscribers.commons.utils.ApiClientGithub;
+import com.github.globant.githubsubscribers.commons.utils.Constants;
+import com.github.globant.githubsubscribers.commons.utils.Debug;
 import com.github.globant.githubsubscribers.commons.utils.ErrorMessagesHelper;
 
 import java.io.IOException;
@@ -36,7 +38,7 @@ public class SubscriberDetailInteractorImpl implements SubscriberDetailInteracto
                     try {
                         listener.onFailureUser(response.errorBody().string(), ErrorMessagesHelper.TypeError.BAD_ANSWER);
                     } catch (IOException e) {
-                        e.printStackTrace();
+                        Debug.e(Constants.EXCEPTION_ERROR, e);
                     }
                 }
             }

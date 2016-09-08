@@ -21,10 +21,12 @@ public class SubscriberDetailPresenterImpl implements SubscriberDetailPresenter,
 
     private SubscriberDetailView view;
     private SubscriberDetailInteractor interactor;
+    private final String TAG;
 
     public SubscriberDetailPresenterImpl(SubscriberDetailView view) {
         this.view = view;
         this.interactor = new SubscriberDetailInteractorImpl();
+        TAG = this.getClass().getSimpleName();
     }
 
     public void onFinishedUser(User userItem) {
@@ -51,7 +53,7 @@ public class SubscriberDetailPresenterImpl implements SubscriberDetailPresenter,
         if (messageId > 0 && view != null) {
             view.showUserError(messageId);
         }
-        Debug.e(this.getClass().getEnclosingMethod().getName() + ": " + errorMessage);
+        Debug.e(TAG + ": s" + this.getClass().getEnclosingMethod().getName() + ": " + errorMessage);
     }
 
     @Override
