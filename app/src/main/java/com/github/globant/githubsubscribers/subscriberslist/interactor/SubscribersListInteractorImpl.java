@@ -43,7 +43,7 @@ public class SubscribersListInteractorImpl implements SubscribersListInteractor 
 
     @Override
     public void onCancelRequest() {
-        if(call != null && call.isExecuted()){
+        if (call != null && call.isExecuted()) {
             call.cancel();
         }
     }
