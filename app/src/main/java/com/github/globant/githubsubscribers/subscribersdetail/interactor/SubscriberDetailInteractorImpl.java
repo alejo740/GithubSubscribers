@@ -19,10 +19,13 @@ import retrofit2.Response;
  * @since 30/08/2016
  */
 public class SubscriberDetailInteractorImpl implements SubscriberDetailInteractor {
+    private Call<User> callUser;
+    private Call<List<Repository>> callRepositories;
+
     @Override
     public void getUserData(String userName, final OnFinishedListener listener) {
-        Call<User> call = ApiClientGithub.getApiService().getSubscriberUser(userName);
-        call.enqueue(new Callback<User>() {
+        callUser = ApiClientGithub.getApiService().getSubscriberUser(userName);
+        callUser.enqueue(new Callback<User>() {
             @Override
             public void onResponse(Call<User> call, Response<User> response) {
                 if (response.isSuccessful()) {
@@ -42,8 +45,8 @@ public class SubscriberDetailInteractorImpl implements SubscriberDetailInteracto
 
     @Override
     public void getUserRepositoryData(String userName, final OnFinishedListener listener) {
-        Call<List<Repository>> call = ApiClientGithub.getApiService().getUserRepositories(userName);
-        call.enqueue(new Callback<List<Repository>>() {
+        callRepositories = ApiClientGithub.getApiService().getUserRepositories(userName);
+        callRepositories.enqueue(new Callback<List<Repository>>() {
             @Override
             public void onResponse(Call<List<Repository>> call, Response<List<Repository>> response) {
                 if (response.isSuccessful()) {
@@ -60,5 +63,19 @@ public class SubscriberDetailInteractorImpl implements SubscriberDetailInteracto
                 listener.onFailureRepository(t.getMessage());
             }
         });
+    }
+
+    @Override
+    public void onCancelRequestUser() {
+        if (callUser != null && callUser.isExecuted()) {
+            callUser.cancel();
+        }
+    }
+
+    @Override
+    public void onCancelRequestRepository() {
+        if (callRepositories != null && callRepositories.isExecuted()) {
+            callRepositories.cancel();
+        }
     }
 }
