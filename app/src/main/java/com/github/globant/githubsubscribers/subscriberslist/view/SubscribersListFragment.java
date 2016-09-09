@@ -2,6 +2,7 @@ package com.github.globant.githubsubscribers.subscriberslist.view;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
@@ -13,10 +14,10 @@ import android.widget.Toast;
 
 import com.github.globant.githubsubscribers.R;
 import com.github.globant.githubsubscribers.commons.models.Subscriber;
-import com.github.globant.githubsubscribers.commons.utils.Utils;
 import com.github.globant.githubsubscribers.subscriberslist.presenter.SubscribersListPresenter;
 import com.github.globant.githubsubscribers.subscriberslist.presenter.SubscribersListPresenterImpl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -28,19 +29,22 @@ import java.util.List;
 
 public class SubscribersListFragment extends Fragment implements SubscribersListView, SwipeRefreshLayout.OnRefreshListener, SubscribersAdapter.ItemClickListener {
 
+    private final static String PRESENTER_SUBSCRIBERS_LIST = "PRESENTER_SUBSCRIBERS_LIST";
     private SubscribersListPresenter presenter;
     private SubscribersAdapter subscribersAdapter;
     private SwipeRefreshLayout swipeLayout;
-    private View viewFragment;
 
     private OnFragmentInteractionListener mListener;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (savedInstanceState == null) {
-            setRetainInstance(true);
-            subscribersAdapter = new SubscribersAdapter();
+        subscribersAdapter = new SubscribersAdapter();
+
+        if (savedInstanceState != null) {
+            List<Subscriber> subscribersListData = savedInstanceState.getParcelableArrayList(PRESENTER_SUBSCRIBERS_LIST);
+            presenter = new SubscribersListPresenterImpl(this, subscribersListData);
+        } else {
             presenter = new SubscribersListPresenterImpl(this);
         }
     }
@@ -48,18 +52,28 @@ public class SubscribersListFragment extends Fragment implements SubscribersList
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        if (savedInstanceState == null) {
-            viewFragment = inflater.inflate(R.layout.fragment_subscribers_list, container, false);
-            swipeLayout = (SwipeRefreshLayout) viewFragment.findViewById(R.id.swipe_layout);
+        View viewFragment = inflater.inflate(R.layout.fragment_subscribers_list, container, false);
+        return viewFragment;
+    }
+
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        if (getView() != null) {
+            swipeLayout = (SwipeRefreshLayout) getView().findViewById(R.id.swipe_layout);
             swipeLayout.setOnRefreshListener(this);
-            RecyclerView recyclerViewSubscribers = (RecyclerView) viewFragment.findViewById(R.id.recycler_view_subscribers);
+            RecyclerView recyclerViewSubscribers = (RecyclerView) getView().findViewById(R.id.recycler_view_subscribers);
             recyclerViewSubscribers.setLayoutManager(new LinearLayoutManager(getActivity()));
             recyclerViewSubscribers.setAdapter(subscribersAdapter);
             subscribersAdapter.setClickListener(this);
-        }else{
-            Utils.debugLog(savedInstanceState.toString());
         }
-        return viewFragment;
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        ArrayList<Subscriber> subscriberListData = (ArrayList<Subscriber>) presenter.getSubscribersListData();
+        outState.putParcelableArrayList(PRESENTER_SUBSCRIBERS_LIST, subscriberListData);
     }
 
     @Override
@@ -93,7 +107,12 @@ public class SubscribersListFragment extends Fragment implements SubscribersList
     @Override
     public void onResume() {
         super.onResume();
-        loadSubscribers();
+        List<Subscriber> listData = presenter.getSubscribersListData();
+        if (listData != null && !listData.isEmpty()) {
+            showSubscribersList(listData);
+        } else {
+            loadSubscribers();
+        }
     }
 
     @Override

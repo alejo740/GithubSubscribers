@@ -1,5 +1,8 @@
 package com.github.globant.githubsubscribers.commons.models;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import com.google.gson.annotations.SerializedName;
 
 import java.lang.reflect.Field;
@@ -11,7 +14,7 @@ import java.lang.reflect.Field;
  * @author juan.herrera
  * @since 19/08/2016
  */
-public class Subscriber {
+public class Subscriber implements Parcelable{
 
     private final String login;
     private final String id;
@@ -23,6 +26,24 @@ public class Subscriber {
         this.id = id;
         this.avataUrl = avataUrl;
     }
+
+    protected Subscriber(Parcel in) {
+        login = in.readString();
+        id = in.readString();
+        avataUrl = in.readString();
+    }
+
+    public static final Creator<Subscriber> CREATOR = new Creator<Subscriber>() {
+        @Override
+        public Subscriber createFromParcel(Parcel in) {
+            return new Subscriber(in);
+        }
+
+        @Override
+        public Subscriber[] newArray(int size) {
+            return new Subscriber[size];
+        }
+    };
 
     public String getLogin() {
         return login;
@@ -61,4 +82,15 @@ public class Subscriber {
         return result.toString();
     }
 
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(login);
+        dest.writeString(id);
+        dest.writeString(avataUrl);
+    }
 }

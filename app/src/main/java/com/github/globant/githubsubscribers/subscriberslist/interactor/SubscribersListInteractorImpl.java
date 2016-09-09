@@ -3,7 +3,6 @@ package com.github.globant.githubsubscribers.subscriberslist.interactor;
 import com.github.globant.githubsubscribers.commons.models.Subscriber;
 import com.github.globant.githubsubscribers.commons.utils.ApiClientGithub;
 import com.github.globant.githubsubscribers.commons.utils.Constants;
-import com.github.globant.githubsubscribers.subscriberslist.interactor.SubscribersListInteractor;
 
 import java.util.List;
 
@@ -19,17 +18,18 @@ import retrofit2.Response;
  * @since 19/08/2016
  */
 public class SubscribersListInteractorImpl implements SubscribersListInteractor {
+    Call<List<Subscriber>> call;
+
     @Override
     public void getSubscribersDataList(final OnFinishedListener listener) {
-        Call<List<Subscriber>> call = ApiClientGithub.getApiService().getSubscribers();
+        call = ApiClientGithub.getApiService().getSubscribers();
         call.enqueue(new Callback<List<Subscriber>>() {
             @Override
             public void onResponse(Call<List<Subscriber>> call, Response<List<Subscriber>> response) {
-                if(response.isSuccessful()){
+                if (response.isSuccessful()) {
                     List<Subscriber> userList = response.body();
                     listener.onResponse(userList);
-                }
-                else{
+                } else {
                     listener.onFailure(Constants.MESSAGE_FAILED_SERVICE);
                 }
             }
@@ -39,5 +39,12 @@ public class SubscribersListInteractorImpl implements SubscribersListInteractor 
                 listener.onFailure(t.getMessage());
             }
         });
+    }
+
+    @Override
+    public void onCancelRequest() {
+        if(call != null && call.isExecuted()){
+            call.cancel();
+        }
     }
 }
