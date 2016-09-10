@@ -115,7 +115,7 @@ public class SubscriberDetailFragment extends Fragment implements SubscriberDeta
 
     public void showSubscriberDetails(User userInfo) {
         Picasso.with(getContext()).load(userInfo.getAvatarUrl()).into(profileImage);
-        profileFullName.setText(Utils.setUnderlineText(userInfo.getName()));
+        profileFullName.setText(userInfo.getName() != null ? Utils.setUnderlineText(userInfo.getName()) : userInfo.getName());
         profileUserName.setText(userInfo.getLogin());
         profileCompany.setText(userInfo.getCompany());
         profileLocation.setText(userInfo.getLocation());
