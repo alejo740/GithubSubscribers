@@ -2,6 +2,8 @@ package com.github.globant.githubsubscribers.subscriberslist.interactor;
 
 import com.github.globant.githubsubscribers.commons.models.Subscriber;
 import com.github.globant.githubsubscribers.commons.utils.ApiClientGithub;
+import com.github.globant.githubsubscribers.commons.utils.Constants;
+import com.github.globant.githubsubscribers.commons.utils.Debug;
 import com.github.globant.githubsubscribers.commons.utils.ErrorMessagesHelper;
 
 import java.io.IOException;
@@ -35,7 +37,7 @@ public class SubscribersListInteractorImpl implements SubscribersListInteractor 
                     try {
                         listener.onFailure(response.errorBody().string(), ErrorMessagesHelper.TypeError.BAD_ANSWER);
                     } catch (IOException e) {
-                        e.printStackTrace();
+                        Debug.e(Constants.EXCEPTION_ERROR, e);
                     }
                 }
             }
