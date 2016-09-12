@@ -1,7 +1,8 @@
 package com.github.globant.githubsubscribers.subscriberslist.presenter;
 
 import com.github.globant.githubsubscribers.commons.models.Subscriber;
-import com.github.globant.githubsubscribers.commons.utils.Utils;
+import com.github.globant.githubsubscribers.commons.utils.Debug;
+import com.github.globant.githubsubscribers.commons.utils.ErrorMessagesHelper;
 import com.github.globant.githubsubscribers.subscriberslist.interactor.SubscribersListInteractor;
 import com.github.globant.githubsubscribers.subscriberslist.interactor.SubscribersListInteractorImpl;
 import com.github.globant.githubsubscribers.subscriberslist.view.SubscribersListView;
@@ -14,6 +15,7 @@ import java.util.List;
  * This class implements SubscribersListPresenter interface.
  *
  * @author edwin.cobos
+ * @author juan.herrera
  * @since 18/08/2016
  */
 public class SubscribersListPresenterImpl implements SubscribersListPresenter, SubscribersListInteractor.OnFinishedListener {
@@ -21,17 +23,20 @@ public class SubscribersListPresenterImpl implements SubscribersListPresenter, S
     private SubscribersListView view;
     private SubscribersListInteractor interactor;
     private List<Subscriber> subscribersListData;
+    private final String TAG;
 
     public SubscribersListPresenterImpl(SubscribersListView view) {
         this.view = view;
         this.interactor = new SubscribersListInteractorImpl();
         this.subscribersListData = new ArrayList<>();
+        this.TAG = this.getClass().getSimpleName();
     }
 
     public SubscribersListPresenterImpl(SubscribersListView view, List<Subscriber> subscribersListData) {
         this.view = view;
         this.interactor = new SubscribersListInteractorImpl();
         this.subscribersListData = subscribersListData;
+        this.TAG = this.getClass().getSimpleName();
     }
 
     @Override
@@ -48,19 +53,22 @@ public class SubscribersListPresenterImpl implements SubscribersListPresenter, S
     @Override
     public void onResponse(List<Subscriber> listItems) {
         subscribersListData.clear();
-        subscribersListData.addAll(listItems);
-        view.showSubscribersList(subscribersListData);
+        if (view != null) {
+            subscribersListData.addAll(listItems);
+            view.showSubscribersList(listItems);
+        }
+    }
+
+    @Override
+    public void onFailure(String errorMessage, ErrorMessagesHelper.TypeError type) {
+        int messageId = ErrorMessagesHelper.getMessage(type);
+        if (messageId > 0 && view != null) {
+            view.showSubscribersError(messageId);
+        }
+        Debug.e(TAG + ": " + errorMessage);
     }
 
     public List<Subscriber> getSubscribersListData() {
         return subscribersListData;
-    }
-
-    @Override
-    public void onFailure(String errorMessage) {
-        //TODO: Manage message errors
-        if (view != null) {
-            view.showSubscribersError();
-        }
     }
 }
