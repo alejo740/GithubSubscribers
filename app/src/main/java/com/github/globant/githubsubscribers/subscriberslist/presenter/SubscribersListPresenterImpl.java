@@ -1,10 +1,12 @@
 package com.github.globant.githubsubscribers.subscriberslist.presenter;
 
 import com.github.globant.githubsubscribers.commons.models.Subscriber;
+import com.github.globant.githubsubscribers.commons.utils.Utils;
 import com.github.globant.githubsubscribers.subscriberslist.interactor.SubscribersListInteractor;
 import com.github.globant.githubsubscribers.subscriberslist.interactor.SubscribersListInteractorImpl;
 import com.github.globant.githubsubscribers.subscriberslist.view.SubscribersListView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -18,15 +20,24 @@ public class SubscribersListPresenterImpl implements SubscribersListPresenter, S
 
     private SubscribersListView view;
     private SubscribersListInteractor interactor;
+    private List<Subscriber> subscribersListData;
 
     public SubscribersListPresenterImpl(SubscribersListView view) {
         this.view = view;
         this.interactor = new SubscribersListInteractorImpl();
+        this.subscribersListData = new ArrayList<>();
+    }
+
+    public SubscribersListPresenterImpl(SubscribersListView view, List<Subscriber> subscribersListData) {
+        this.view = view;
+        this.interactor = new SubscribersListInteractorImpl();
+        this.subscribersListData = subscribersListData;
     }
 
     @Override
     public void onDestroy() {
         view = null;
+        interactor.onCancelRequest();
     }
 
     @Override
@@ -36,12 +47,20 @@ public class SubscribersListPresenterImpl implements SubscribersListPresenter, S
 
     @Override
     public void onResponse(List<Subscriber> listItems) {
-        view.showSubscribersList(listItems);
+        subscribersListData.clear();
+        subscribersListData.addAll(listItems);
+        view.showSubscribersList(subscribersListData);
+    }
+
+    public List<Subscriber> getSubscribersListData() {
+        return subscribersListData;
     }
 
     @Override
     public void onFailure(String errorMessage) {
         //TODO: Manage message errors
-        view.showSubscribersError();
+        if (view != null) {
+            view.showSubscribersError();
+        }
     }
 }

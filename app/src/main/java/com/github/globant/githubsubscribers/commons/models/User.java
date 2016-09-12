@@ -1,5 +1,8 @@
 package com.github.globant.githubsubscribers.commons.models;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import com.google.gson.annotations.SerializedName;
 
 /**
@@ -8,7 +11,7 @@ import com.google.gson.annotations.SerializedName;
  * @author juan.herrera
  * @since 30/08/2016
  */
-public class User {
+public class User implements Parcelable {
     private String login;
     private int id;
     @SerializedName("avatar_url")
@@ -36,6 +39,31 @@ public class User {
         this.followers = followers;
         this.following = following;
     }
+
+    protected User(Parcel in) {
+        login = in.readString();
+        id = in.readInt();
+        avatarUrl = in.readString();
+        htmlUrl = in.readString();
+        name = in.readString();
+        company = in.readString();
+        location = in.readString();
+        publicRepos = in.readInt();
+        followers = in.readInt();
+        following = in.readInt();
+    }
+
+    public static final Creator<User> CREATOR = new Creator<User>() {
+        @Override
+        public User createFromParcel(Parcel in) {
+            return new User(in);
+        }
+
+        @Override
+        public User[] newArray(int size) {
+            return new User[size];
+        }
+    };
 
     public String getLogin() {
         return login;
@@ -75,5 +103,24 @@ public class User {
 
     public int getFollowing() {
         return following;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(login);
+        dest.writeInt(id);
+        dest.writeString(avatarUrl);
+        dest.writeString(htmlUrl);
+        dest.writeString(name);
+        dest.writeString(company);
+        dest.writeString(location);
+        dest.writeInt(publicRepos);
+        dest.writeInt(followers);
+        dest.writeInt(following);
     }
 }
