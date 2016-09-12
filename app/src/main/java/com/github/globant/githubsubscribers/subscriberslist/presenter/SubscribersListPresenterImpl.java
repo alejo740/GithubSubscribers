@@ -7,6 +7,7 @@ import com.github.globant.githubsubscribers.subscriberslist.interactor.Subscribe
 import com.github.globant.githubsubscribers.subscriberslist.interactor.SubscribersListInteractorImpl;
 import com.github.globant.githubsubscribers.subscriberslist.view.SubscribersListView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -14,16 +15,28 @@ import java.util.List;
  * This class implements SubscribersListPresenter interface.
  *
  * @author edwin.cobos
+ * @author juan.herrera
  * @since 18/08/2016
  */
 public class SubscribersListPresenterImpl implements SubscribersListPresenter, SubscribersListInteractor.OnFinishedListener {
 
     private SubscribersListView view;
     private SubscribersListInteractor interactor;
+    private List<Subscriber> subscribersListData;
+    private final String TAG;
 
     public SubscribersListPresenterImpl(SubscribersListView view) {
         this.view = view;
         this.interactor = new SubscribersListInteractorImpl();
+        this.subscribersListData = new ArrayList<>();
+        this.TAG = this.getClass().getSimpleName();
+    }
+
+    public SubscribersListPresenterImpl(SubscribersListView view, List<Subscriber> subscribersListData) {
+        this.view = view;
+        this.interactor = new SubscribersListInteractorImpl();
+        this.subscribersListData = subscribersListData;
+        this.TAG = this.getClass().getSimpleName();
     }
 
     @Override
@@ -39,7 +52,9 @@ public class SubscribersListPresenterImpl implements SubscribersListPresenter, S
 
     @Override
     public void onResponse(List<Subscriber> listItems) {
+        subscribersListData.clear();
         if (view != null) {
+            subscribersListData.addAll(listItems);
             view.showSubscribersList(listItems);
         }
     }
@@ -50,6 +65,10 @@ public class SubscribersListPresenterImpl implements SubscribersListPresenter, S
         if (messageId > 0 && view != null) {
             view.showSubscribersError(messageId);
         }
-        Debug.e(this.getClass().getEnclosingMethod().getName() + ": " + errorMessage);
+        Debug.e(TAG + ": " + errorMessage);
+    }
+
+    public List<Subscriber> getSubscribersListData() {
+        return subscribersListData;
     }
 }

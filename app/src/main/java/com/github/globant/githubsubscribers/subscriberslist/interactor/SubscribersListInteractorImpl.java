@@ -16,6 +16,7 @@ import retrofit2.Response;
  * This class implements SubscribersListInteractor interface.
  *
  * @author edwin.cobos
+ * @author juan.herrera
  * @since 19/08/2016
  */
 public class SubscribersListInteractorImpl implements SubscribersListInteractor {
@@ -52,7 +53,7 @@ public class SubscribersListInteractorImpl implements SubscribersListInteractor 
 
     @Override
     public void onCancelRequest() {
-        if (call.isExecuted()) {
+        if (call != null && call.isExecuted()) {
             call.cancel();
         }
     }

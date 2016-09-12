@@ -10,9 +10,11 @@ import java.util.List;
  * Interface SubscriberDetailInteractor that represents interactor class(User Model) to deliver the data to presenter.
  *
  * @author juan.herrera
+ * @author edwin.cobos
  * @since 30/08/2016
  */
 public interface SubscriberDetailInteractor {
+
     interface OnFinishedListener {
         void onFinishedUser(User userItem);
 

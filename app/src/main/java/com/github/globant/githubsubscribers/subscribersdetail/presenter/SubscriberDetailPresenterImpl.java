@@ -8,6 +8,7 @@ import com.github.globant.githubsubscribers.subscribersdetail.interactor.Subscri
 import com.github.globant.githubsubscribers.subscribersdetail.interactor.SubscriberDetailInteractorImpl;
 import com.github.globant.githubsubscribers.subscribersdetail.view.SubscriberDetailView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -15,6 +16,7 @@ import java.util.List;
  * This class implements SubscriberDetailPresenter interface.
  *
  * @author juan.herrera
+ * @author edwin.cobos
  * @since 30/08/2016
  */
 public class SubscriberDetailPresenterImpl implements SubscriberDetailPresenter, SubscriberDetailInteractor.OnFinishedListener {
@@ -22,20 +24,27 @@ public class SubscriberDetailPresenterImpl implements SubscriberDetailPresenter,
     private SubscriberDetailView view;
     private SubscriberDetailInteractor interactor;
     private final String TAG;
+    private User userData;
+    private List<Repository> repositoryListData;
 
     public SubscriberDetailPresenterImpl(SubscriberDetailView view) {
         this.view = view;
         this.interactor = new SubscriberDetailInteractorImpl();
+        this.repositoryListData = new ArrayList<>();
+        TAG = this.getClass().getSimpleName();
+    }
+
+    public SubscriberDetailPresenterImpl(SubscriberDetailView view, User userData, List<Repository> repositoryListData) {
+        this.view = view;
+        this.interactor = new SubscriberDetailInteractorImpl();
+        this.repositoryListData = repositoryListData;
+        this.userData = userData;
         TAG = this.getClass().getSimpleName();
     }
 
     public void onFinishedUser(User userItem) {
-        view.showSubscriberDetails(userItem);
-    }
-
-    @Override
-    public void onFinishedRepository(List<Repository> repositoryList) {
-        view.showSubscriberUserRepositories(repositoryList);
+        userData = userItem;
+        view.showSubscriberDetails(userData);
     }
 
     @Override
@@ -44,7 +53,7 @@ public class SubscriberDetailPresenterImpl implements SubscriberDetailPresenter,
         if (messageId > 0 && view != null) {
             view.showUserError(messageId);
         }
-        Debug.e(this.getClass().getEnclosingMethod().getName() + ": " + errorMessage);
+        Debug.e(TAG + ": " + errorMessage);
     }
 
     @Override
@@ -53,7 +62,14 @@ public class SubscriberDetailPresenterImpl implements SubscriberDetailPresenter,
         if (messageId > 0 && view != null) {
             view.showUserError(messageId);
         }
-        Debug.e(TAG + ": s" + this.getClass().getEnclosingMethod().getName() + ": " + errorMessage);
+        Debug.e(TAG + ": " + errorMessage);
+    }
+
+    @Override
+    public void onFinishedRepository(List<Repository> repositoryList) {
+        repositoryListData.clear();
+        repositoryListData.addAll(repositoryList);
+        view.showSubscriberUserRepositories(repositoryListData);
     }
 
     @Override
@@ -71,5 +87,13 @@ public class SubscriberDetailPresenterImpl implements SubscriberDetailPresenter,
     @Override
     public void getRepositoryList(String userName) {
         interactor.getUserRepositoryData(userName, this);
+    }
+
+    public User getUserData() {
+        return userData;
+    }
+
+    public List<Repository> getRepositoryListData() {
+        return repositoryListData;
     }
 }

@@ -22,5 +22,4 @@ public interface SubscribersListInteractor {
     void getSubscribersDataList(OnFinishedListener listener);
 
     void onCancelRequest();
-
 }

@@ -19,6 +19,7 @@ import retrofit2.Response;
  * This class implements SubscriberDetailInteractor interface.
  *
  * @author juan.herrera
+ * @author edwin.cobos
  * @since 30/08/2016
  */
 public class SubscriberDetailInteractorImpl implements SubscriberDetailInteractor {
@@ -85,14 +86,14 @@ public class SubscriberDetailInteractorImpl implements SubscriberDetailInteracto
 
     @Override
     public void onCancelRequestUser() {
-        if (callUser.isExecuted()) {
+        if (callUser != null && callUser.isExecuted()) {
             callUser.cancel();
         }
     }
 
     @Override
     public void onCancelRequestRepository() {
-        if (callRepositories.isExecuted()) {
+        if (callRepositories != null && callRepositories.isExecuted()) {
             callRepositories.cancel();
         }
     }
