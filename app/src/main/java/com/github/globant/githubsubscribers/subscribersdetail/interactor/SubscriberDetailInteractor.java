@@ -12,6 +12,10 @@ import java.util.List;
  * @since 30/08/2016
  */
 public interface SubscriberDetailInteractor {
+    void onCancelRequestUser();
+
+    void onCancelRequestRepository();
+
     interface OnFinishedListener {
         void onFinishedUser(User userItem);
         void onFailureUser(String errorMessage);

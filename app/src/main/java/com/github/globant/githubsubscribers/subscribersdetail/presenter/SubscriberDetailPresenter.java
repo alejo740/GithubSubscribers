@@ -1,5 +1,10 @@
 package com.github.globant.githubsubscribers.subscribersdetail.presenter;
 
+import com.github.globant.githubsubscribers.commons.models.Repository;
+import com.github.globant.githubsubscribers.commons.models.User;
+
+import java.util.List;
+
 /**
  * Interface SubscriberDetailPresenter that represents the presenter class to communicate the Activity
  * class(view) and Interactor class(User Model).
@@ -14,4 +19,8 @@ public interface SubscriberDetailPresenter {
     void getUser(String userName);
 
     void getRepositoryList(String userName);
+
+    User getUserData();
+
+    List<Repository> getRepositoryListData();
 }
