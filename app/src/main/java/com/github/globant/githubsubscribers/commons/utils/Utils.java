@@ -15,10 +15,10 @@ import android.text.style.UnderlineSpan;
  */
 public class Utils {
 
-    public static SpannableString setUnderlineText(String someText) {
+    public static String setUnderlineText(String someText) {
         SpannableString spanString = new SpannableString(someText);
         spanString.setSpan(new UnderlineSpan(), 0, spanString.length(), 0);
-        return spanString;
+        return spanString.toString();
     }
 
     public static void openLinkInBrowser(Context context, String url) {

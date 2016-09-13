@@ -37,6 +37,7 @@ public class SubscriberDetailFragment extends Fragment implements SubscriberDeta
     private final static String PRESENTER_REPO_LIST_DATA = "PRESENTER_REPO_LIST_DATA";
     private final static String ARG_USERNAME = "ARG_USERNAME";
     private final static String HTML_URL = "HTML_URL";
+    private final static String EMPTY_SPACE = "";
     private String userNameParam;
     private String profileHtmlUrl;
 
@@ -154,8 +155,9 @@ public class SubscriberDetailFragment extends Fragment implements SubscriberDeta
     }
 
     public void showSubscriberDetails(User userInfo) {
+        String name = userInfo.getName() != null ? Utils.setUnderlineText(userInfo.getName()) : EMPTY_SPACE;
         Picasso.with(getContext()).load(userInfo.getAvatarUrl()).into(profileImage);
-        profileFullName.setText(Utils.setUnderlineText(userInfo.getName()));
+        profileFullName.setText(name);
         profileUserName.setText(userInfo.getLogin());
         profileCompany.setText(userInfo.getCompany());
         profileLocation.setText(userInfo.getLocation());
