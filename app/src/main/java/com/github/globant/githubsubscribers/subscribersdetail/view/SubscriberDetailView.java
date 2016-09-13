@@ -18,7 +18,5 @@ public interface SubscriberDetailView {
 
     void showSubscriberUserRepositories(List<Repository> repositoryList);
 
-    void showUserError();
-
-    void showRepositoryError();
+    void showUserError(int messageId);
 }

@@ -24,6 +24,7 @@ import java.util.List;
  * Fragment class that shows list of Subscribers into RecyclerView
  *
  * @author juan.herrera
+ * @author edwin.cobos
  * @since 29/08/2016
  */
 
@@ -128,8 +129,8 @@ public class SubscribersListFragment extends Fragment implements SubscribersList
     }
 
     @Override
-    public void showSubscribersError() {
-        Toast.makeText(getContext(), R.string.api_client_error, Toast.LENGTH_LONG).show();
+    public void showSubscribersError(int messageId) {
+        Toast.makeText(getContext(), messageId, Toast.LENGTH_LONG).show();
     }
 
     @Override
