@@ -1,5 +1,7 @@
 package com.github.globant.githubsubscribers.subscriberslist.interactor;
 
+import android.support.annotation.VisibleForTesting;
+
 import com.github.globant.githubsubscribers.commons.models.Subscriber;
 import com.github.globant.githubsubscribers.commons.utils.ApiClientGithub;
 import com.github.globant.githubsubscribers.commons.utils.Constants;
@@ -18,6 +20,8 @@ import retrofit2.Response;
  * @since 19/08/2016
  */
 public class SubscribersListInteractorImpl implements SubscribersListInteractor {
+
+    @VisibleForTesting
     Call<List<Subscriber>> call;
 
     @Override
