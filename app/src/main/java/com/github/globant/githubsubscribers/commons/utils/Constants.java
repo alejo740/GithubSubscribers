@@ -15,6 +15,7 @@ public class Constants {
     public final static String MESSAGE_FAILED_SERVICE = "The sevice is not available";
 
     public static final long SPLASH_DELAY = 3000;
+    public static final String EXCEPTION_ERROR = "Exception";
 
     public final static class SplashLogoAnimation {
         public final static long START_DELAY = 200;

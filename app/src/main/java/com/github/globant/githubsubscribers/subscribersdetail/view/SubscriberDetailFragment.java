@@ -15,6 +15,7 @@ import android.widget.Toast;
 import com.github.globant.githubsubscribers.R;
 import com.github.globant.githubsubscribers.commons.models.Repository;
 import com.github.globant.githubsubscribers.commons.models.User;
+import com.github.globant.githubsubscribers.commons.utils.Debug;
 import com.github.globant.githubsubscribers.commons.utils.Utils;
 import com.github.globant.githubsubscribers.subscribersdetail.presenter.SubscriberDetailPresenter;
 import com.github.globant.githubsubscribers.subscribersdetail.presenter.SubscriberDetailPresenterImpl;
@@ -27,6 +28,7 @@ import java.util.List;
  * Fragment class that shows details of Subscriber
  *
  * @author juan.herrera
+ * @author edwin.cobos
  * @since 31/08/2016
  */
 public class SubscriberDetailFragment extends Fragment implements SubscriberDetailView, RepositoryAdapter.OnRepositoryItemClickListener, View.OnClickListener {
@@ -35,6 +37,7 @@ public class SubscriberDetailFragment extends Fragment implements SubscriberDeta
     private final static String PRESENTER_REPO_LIST_DATA = "PRESENTER_REPO_LIST_DATA";
     private final static String ARG_USERNAME = "ARG_USERNAME";
     private final static String HTML_URL = "HTML_URL";
+    private final static String EMPTY_SPACE = "";
     private String userNameParam;
     private String profileHtmlUrl;
 
@@ -105,6 +108,8 @@ public class SubscriberDetailFragment extends Fragment implements SubscriberDeta
             recyclerViewSubscribers.setLayoutManager(new LinearLayoutManager(getActivity()));
             recyclerViewSubscribers.setAdapter(repositoriesAdapter);
             repositoriesAdapter.setClickListener(this);
+        } else {
+            Debug.i(savedInstanceState.toString());
         }
     }
 
@@ -145,18 +150,14 @@ public class SubscriberDetailFragment extends Fragment implements SubscriberDeta
     }
 
     @Override
-    public void showUserError() {
-        Toast.makeText(getContext(), R.string.api_client_error, Toast.LENGTH_LONG).show();
-    }
-
-    @Override
-    public void showRepositoryError() {
-        Toast.makeText(getContext(), R.string.api_client_error, Toast.LENGTH_LONG).show();
+    public void showUserError(int messageId) {
+        Toast.makeText(getContext(), messageId, Toast.LENGTH_LONG).show();
     }
 
     public void showSubscriberDetails(User userInfo) {
+        String name = userInfo.getName() != null ? Utils.setUnderlineText(userInfo.getName()) : EMPTY_SPACE;
         Picasso.with(getContext()).load(userInfo.getAvatarUrl()).into(profileImage);
-        profileFullName.setText(Utils.setUnderlineText(userInfo.getName()));
+        profileFullName.setText(name);
         profileUserName.setText(userInfo.getLogin());
         profileCompany.setText(userInfo.getCompany());
         profileLocation.setText(userInfo.getLocation());

@@ -8,6 +8,7 @@ import java.util.List;
  * Interface SubscribersListPresenter that represents the presenter class to communicate the Activity class(view) and Interactor class(Model).
  *
  * @author edwin.cobos
+ * @author juan.herrera
  * @since 18/08/2016
  */
 public interface SubscribersListPresenter {

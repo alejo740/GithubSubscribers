@@ -10,6 +10,7 @@ import java.util.List;
  * class(view) and Interactor class(User Model).
  *
  * @author juan.herrera
+ * @author edwin.cobos
  * @since 30/08/2016
  */
 public interface SubscriberDetailPresenter {

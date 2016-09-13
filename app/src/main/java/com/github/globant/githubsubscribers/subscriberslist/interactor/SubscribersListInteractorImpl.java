@@ -5,7 +5,10 @@ import android.support.annotation.VisibleForTesting;
 import com.github.globant.githubsubscribers.commons.models.Subscriber;
 import com.github.globant.githubsubscribers.commons.utils.ApiClientGithub;
 import com.github.globant.githubsubscribers.commons.utils.Constants;
+import com.github.globant.githubsubscribers.commons.utils.Debug;
+import com.github.globant.githubsubscribers.commons.utils.ErrorMessagesHelper;
 
+import java.io.IOException;
 import java.util.List;
 
 import retrofit2.Call;
@@ -17,6 +20,7 @@ import retrofit2.Response;
  * This class implements SubscribersListInteractor interface.
  *
  * @author edwin.cobos
+ * @author juan.herrera
  * @since 19/08/2016
  */
 public class SubscribersListInteractorImpl implements SubscribersListInteractor {
@@ -34,13 +38,21 @@ public class SubscribersListInteractorImpl implements SubscribersListInteractor 
                     List<Subscriber> userList = response.body();
                     listener.onResponse(userList);
                 } else {
-                    listener.onFailure(Constants.MESSAGE_FAILED_SERVICE);
+                    try {
+                        listener.onFailure(response.errorBody().string(), ErrorMessagesHelper.TypeError.BAD_ANSWER);
+                    } catch (IOException e) {
+                        Debug.e(Constants.EXCEPTION_ERROR, e);
+                    }
                 }
             }
 
             @Override
             public void onFailure(Call<List<Subscriber>> call, Throwable t) {
-                listener.onFailure(t.getMessage());
+                if (call.isCanceled()) {
+                    listener.onFailure(t.getMessage(), ErrorMessagesHelper.TypeError.REQUEST_CANCELLED);
+                } else {
+                    listener.onFailure(t.getMessage(), ErrorMessagesHelper.TypeError.NO_CONNECTION);
+                }
             }
         });
     }
