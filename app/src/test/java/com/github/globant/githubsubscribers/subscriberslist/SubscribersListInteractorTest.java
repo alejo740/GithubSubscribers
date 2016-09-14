@@ -67,10 +67,8 @@ public class SubscribersListInteractorTest {
         //Then Subscribers list is loaded from Interactor and the callback is captured
         verify(interactor).getSubscribersDataList(OnFinishedListenerCallBack.capture());
 
-        //When Subscribers list is finally loaded
         OnFinishedListenerCallBack.getValue().onResponse(subscriberList);
 
-        //Then Subscribers list is shown in UI
         view.showSubscribersList(subscriberList);
     }
 

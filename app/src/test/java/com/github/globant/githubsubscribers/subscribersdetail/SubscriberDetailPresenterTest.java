@@ -90,10 +90,8 @@ public class SubscriberDetailPresenterTest {
         //Then User information is loaded from Interactor and the callback is captured
         verify(interactor).getUserData(eq(USER_NAME_PARAM), OnFinishedListenerCallBack.capture());
 
-        //When User information is finally loaded
         OnFinishedListenerCallBack.getValue().onFinishedUser(user);
 
-        //Then User information is shown in UI
         view.showSubscriberDetails(user);
     }
 
@@ -113,10 +111,8 @@ public class SubscriberDetailPresenterTest {
         //Then Repositories list is loaded from Interactor and the callback is captured
         verify(interactor).getUserRepositoryData(eq(USER_NAME_PARAM), OnFinishedListenerCallBack.capture());
 
-        //When Repositories list is finally loaded
         OnFinishedListenerCallBack.getValue().onFinishedRepository(repoList);
 
-        //Then Repositories list is shown in UI
         view.showSubscriberUserRepositories(repoList);
     }
 
