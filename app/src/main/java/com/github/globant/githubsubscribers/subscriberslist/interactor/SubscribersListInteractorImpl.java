@@ -9,6 +9,7 @@ import com.github.globant.githubsubscribers.commons.utils.Debug;
 import com.github.globant.githubsubscribers.commons.utils.ErrorMessagesHelper;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;
@@ -34,7 +35,8 @@ public class SubscribersListInteractorImpl implements SubscribersListInteractor 
             @Override
             public void onResponse(Call<List<Subscriber>> call, Response<List<Subscriber>> response) {
                 if (response.isSuccessful()) {
-                    List<Subscriber> userList = response.body();
+                    List<Subscriber> userList = new ArrayList<>();
+                    //List<Subscriber> userList = response.body();
                     listener.onResponse(userList);
                 } else {
                     try {
