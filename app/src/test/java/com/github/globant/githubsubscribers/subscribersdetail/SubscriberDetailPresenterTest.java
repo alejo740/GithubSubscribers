@@ -3,6 +3,7 @@ package com.github.globant.githubsubscribers.subscribersdetail;
 import com.github.globant.githubsubscribers.commons.models.Repository;
 import com.github.globant.githubsubscribers.commons.models.User;
 import com.github.globant.githubsubscribers.subscribersdetail.interactor.SubscriberDetailInteractor;
+import com.github.globant.githubsubscribers.subscribersdetail.interactor.SubscriberDetailInteractorImpl;
 import com.github.globant.githubsubscribers.subscribersdetail.presenter.SubscriberDetailPresenter;
 import com.github.globant.githubsubscribers.subscribersdetail.presenter.SubscriberDetailPresenterImpl;
 import com.github.globant.githubsubscribers.subscribersdetail.view.SubscriberDetailView;
@@ -20,6 +21,9 @@ import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.verify;
 
 /**
+ * Unit testing for the workflow of MVP of SubscriberDetail going by the methods from view,
+ * presenter and interactor.
+ *
  * @author edwin.cobos
  * @since 13/09/2016
  */
@@ -70,36 +74,49 @@ public class SubscriberDetailPresenterTest {
     public void setupSubscriberDetailPresenter() {
         MockitoAnnotations.initMocks(this);
 
+        // Get a reference to the class under test
         presenter = new SubscriberDetailPresenterImpl(view, interactor);
     }
 
     @Test
     public void getUserInfoFromInteractorAndLoadIntoView() {
 
+        // Given an initialized User object with fake data
         User user = new User(login, id, avatar_url, html_url, name, company, location, public_repos, followers, following);
 
+        // When detail presenter is called to get a User information
         presenter.getUser(USER_NAME_PARAM);
+
+        //Then User information is loaded from Interactor and the callback is captured
         verify(interactor).getUserData(eq(USER_NAME_PARAM), OnFinishedListenerCallBack.capture());
 
+        //When User information is finally loaded
         OnFinishedListenerCallBack.getValue().onFinishedUser(user);
 
+        //Then User information is shown in UI
         view.showSubscriberDetails(user);
     }
 
     @Test
     public void getRepositoriesListFromInteractorAndLoadIntoView() {
 
+        // Given an initialized Repository object with fake data and a list is created
         Repository repo1 = new Repository(id_repo1, name_repo1, fullName_repo1, html_url_repo1);
         Repository repo2 = new Repository(id_repo2, name_repo2, fullName_repo2, html_url_repo2);
         ArrayList<Repository> repoList = new ArrayList<>();
         repoList.add(repo1);
         repoList.add(repo2);
 
+        // When detail presenter is called to get a Repositories list
         presenter.getRepositoryList(USER_NAME_PARAM);
+
+        //Then Repositories list is loaded from Interactor and the callback is captured
         verify(interactor).getUserRepositoryData(eq(USER_NAME_PARAM), OnFinishedListenerCallBack.capture());
 
+        //When Repositories list is finally loaded
         OnFinishedListenerCallBack.getValue().onFinishedRepository(repoList);
 
+        //Then Repositories list is shown in UI
         view.showSubscriberUserRepositories(repoList);
     }
 
