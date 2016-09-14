@@ -2,23 +2,29 @@ package com.github.globant.githubsubscribers.subscribersdetail;
 
 import com.github.globant.githubsubscribers.commons.models.Repository;
 import com.github.globant.githubsubscribers.commons.models.User;
+import com.github.globant.githubsubscribers.commons.utils.Constants;
+import com.github.globant.githubsubscribers.commons.utils.Debug;
+import com.github.globant.githubsubscribers.commons.utils.ErrorMessagesHelper;
 import com.github.globant.githubsubscribers.subscribersdetail.interactor.SubscriberDetailInteractor;
-import com.github.globant.githubsubscribers.subscribersdetail.interactor.SubscriberDetailInteractorImpl;
 import com.github.globant.githubsubscribers.subscribersdetail.presenter.SubscriberDetailPresenter;
 import com.github.globant.githubsubscribers.subscribersdetail.presenter.SubscriberDetailPresenterImpl;
 import com.github.globant.githubsubscribers.subscribersdetail.view.SubscriberDetailView;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.mockito.ArgumentCaptor;
 import org.mockito.Captor;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.powermock.core.classloader.annotations.PrepareForTest;
+import org.powermock.modules.junit4.PowerMockRunner;
 
 import java.util.ArrayList;
 
 import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.verify;
+import static org.powermock.api.mockito.PowerMockito.mockStatic;
 
 /**
  * Unit testing for the workflow of MVP of SubscriberDetail going by the methods from view,
@@ -27,6 +33,8 @@ import static org.mockito.Mockito.verify;
  * @author edwin.cobos
  * @since 13/09/2016
  */
+@RunWith(PowerMockRunner.class)
+@PrepareForTest({Debug.class}) // Prepare the static classes for mocking
 public class SubscriberDetailPresenterTest {
 
     private static final String USER_NAME_PARAM = "keyboardsurfer";
@@ -76,8 +84,13 @@ public class SubscriberDetailPresenterTest {
 
         // Get a reference to the class under test
         presenter = new SubscriberDetailPresenterImpl(view, interactor);
+        // Setup mocking for Environment and File classes
+        mockStatic(Debug.class);
     }
 
+    /**
+     * Unit Test to try when a successful answer is given from the User Info service
+     */
     @Test
     public void getUserInfoFromInteractorAndLoadIntoView() {
 
@@ -95,6 +108,53 @@ public class SubscriberDetailPresenterTest {
         view.showSubscriberDetails(user);
     }
 
+    /**
+     * Unit Test to try when a null answer is given from the User Info service
+     */
+    @Test
+    public void getNullUserInfoRequestFromInteractor() {
+
+        // Given a type error with fake error message
+        ErrorMessagesHelper.TypeError typeError = ErrorMessagesHelper.TypeError.BAD_ANSWER;
+        String errorMessage = Constants.EXCEPTION_ERROR + ": " + typeError.toString();
+
+        // When detail presenter is called to get a User information
+        presenter.getUser(USER_NAME_PARAM);
+
+        //Then User information is loaded from Interactor and the callback is captured
+        verify(interactor).getUserData(eq(USER_NAME_PARAM), OnFinishedListenerCallBack.capture());
+
+        OnFinishedListenerCallBack.getValue().onFailureUser(errorMessage, typeError);
+
+        int messageId = ErrorMessagesHelper.getMessage(typeError);
+        view.showUserError(messageId);
+    }
+
+    /**
+     * Unit Test to try when a Not Connection answer is given from the User Info service
+     */
+    @Test
+    public void getNotConnectionUserInfoRequestFromInteractor() {
+
+        // Given a type error with fake error message
+        ErrorMessagesHelper.TypeError typeError = ErrorMessagesHelper.TypeError.NO_CONNECTION;
+        String errorMessage = Constants.EXCEPTION_ERROR + ": " + typeError.toString();
+
+        // When detail presenter is called to get a User information
+        presenter.getUser(USER_NAME_PARAM);
+
+        //Then User information is loaded from Interactor and the callback is captured
+        verify(interactor).getUserData(eq(USER_NAME_PARAM), OnFinishedListenerCallBack.capture());
+
+        OnFinishedListenerCallBack.getValue().onFailureUser(errorMessage, typeError);
+
+        int messageId = ErrorMessagesHelper.getMessage(typeError);
+        view.showUserError(messageId);
+    }
+
+    /**
+     * Unit Test to try when a successful answer is given from the Repositories service
+     */
     @Test
     public void getRepositoriesListFromInteractorAndLoadIntoView() {
 
@@ -115,5 +175,51 @@ public class SubscriberDetailPresenterTest {
 
         view.showSubscriberUserRepositories(repoList);
     }
+
+    /**
+     * Unit Test to try when a Empty answer is given from the Respositories service
+     */
+    @Test
+    public void getEmptyRepositoriesListFromInteractor() {
+
+        // Given an empty Repository object and a type error with fake error message
+        ArrayList<Repository> repoList = new ArrayList<>();
+        ErrorMessagesHelper.TypeError typeError = ErrorMessagesHelper.TypeError.BAD_ANSWER;
+        String errorMessage = Constants.EXCEPTION_ERROR + ": " + typeError.toString();
+
+        // When detail presenter is called to get a Repositories list
+        presenter.getRepositoryList(USER_NAME_PARAM);
+
+        //Then Repositories list is loaded from Interactor and the callback is captured
+        verify(interactor).getUserRepositoryData(eq(USER_NAME_PARAM), OnFinishedListenerCallBack.capture());
+
+        OnFinishedListenerCallBack.getValue().onFailureRepository(errorMessage, typeError);
+
+        int messageId = ErrorMessagesHelper.getMessage(typeError);
+        view.showUserError(messageId);
+    }
+
+    /**
+     * Unit Test to try when a request cancelled answer is given from the Respositories service
+     */
+    @Test
+    public void getCancelledRepositoriesListRequestFromInteractor() {
+
+        // Given an empty Repository object and a type error with fake error message
+        ErrorMessagesHelper.TypeError typeError = ErrorMessagesHelper.TypeError.REQUEST_CANCELLED;
+        String errorMessage = Constants.EXCEPTION_ERROR + ": " + typeError.toString();
+
+        // When detail presenter is called to get a Repositories list
+        presenter.getRepositoryList(USER_NAME_PARAM);
+
+        //Then Repositories list is loaded from Interactor and the callback is captured
+        verify(interactor).getUserRepositoryData(eq(USER_NAME_PARAM), OnFinishedListenerCallBack.capture());
+
+        OnFinishedListenerCallBack.getValue().onFailureRepository(errorMessage, typeError);
+
+        int messageId = ErrorMessagesHelper.getMessage(typeError);
+        view.showUserError(messageId);
+    }
+
 
 }
