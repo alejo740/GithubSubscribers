@@ -48,7 +48,7 @@ public class SubscriberDetailPresenterTest {
     private static String avatar_url = "https://avatars.githubusercontent.com/u/336005?v=3";
     private static String html_url = "https://github.com/keyboardsurfer";
     private static String name = "Ben Weiss";
-    private static String company = "@Google ";
+    private static String company = "@Google";
     private static String location = "London, UK";
     private static int public_repos = 5;
     private static int followers = 1149;
