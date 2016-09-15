@@ -105,7 +105,7 @@ public class SubscriberDetailPresenterTest {
 
         OnFinishedListenerCallBack.getValue().onFinishedUser(user);
 
-        view.showSubscriberDetails(user);
+        verify(view).showSubscriberDetails(user);
     }
 
     /**
@@ -127,7 +127,7 @@ public class SubscriberDetailPresenterTest {
         OnFinishedListenerCallBack.getValue().onFailureUser(errorMessage, typeError);
 
         int messageId = ErrorMessagesHelper.getMessage(typeError);
-        view.showUserError(messageId);
+        verify(view).showUserError(messageId);
     }
 
     /**
@@ -149,7 +149,7 @@ public class SubscriberDetailPresenterTest {
         OnFinishedListenerCallBack.getValue().onFailureUser(errorMessage, typeError);
 
         int messageId = ErrorMessagesHelper.getMessage(typeError);
-        view.showUserError(messageId);
+        verify(view).showUserError(messageId);
     }
 
     /**
@@ -173,7 +173,7 @@ public class SubscriberDetailPresenterTest {
 
         OnFinishedListenerCallBack.getValue().onFinishedRepository(repoList);
 
-        view.showSubscriberUserRepositories(repoList);
+        verify(view).showSubscriberUserRepositories(repoList);
     }
 
     /**
@@ -196,7 +196,7 @@ public class SubscriberDetailPresenterTest {
         OnFinishedListenerCallBack.getValue().onFailureRepository(errorMessage, typeError);
 
         int messageId = ErrorMessagesHelper.getMessage(typeError);
-        view.showUserError(messageId);
+        verify(view).showUserError(messageId);
     }
 
     /**
@@ -218,7 +218,7 @@ public class SubscriberDetailPresenterTest {
         OnFinishedListenerCallBack.getValue().onFailureRepository(errorMessage, typeError);
 
         int messageId = ErrorMessagesHelper.getMessage(typeError);
-        view.showUserError(messageId);
+        verify(view).showUserError(messageId);
     }
 
 

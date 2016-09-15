@@ -89,7 +89,7 @@ public class SubscribersListInteractorTest {
 
         OnFinishedListenerCallBack.getValue().onResponse(subscriberList);
 
-        view.showSubscribersList(subscriberList);
+        verify(view).showSubscribersList(subscriberList);
     }
 
     /**
@@ -111,7 +111,7 @@ public class SubscribersListInteractorTest {
         OnFinishedListenerCallBack.getValue().onFailure(errorMessage, typeError);
 
         int messageId = ErrorMessagesHelper.getMessage(typeError);
-        view.showSubscribersError(messageId);
+        verify(view).showSubscribersError(messageId);
     }
 
     /**
@@ -128,13 +128,12 @@ public class SubscribersListInteractorTest {
         presenter.getSubscribersList();
 
         // Then Subscribers list is loaded from Interactor and the callback is captured
-
         verify(interactor).getSubscribersDataList(OnFinishedListenerCallBack.capture());
 
         OnFinishedListenerCallBack.getValue().onFailure(errorMessage, typeError);
 
         int messageId = ErrorMessagesHelper.getMessage(typeError);
-        view.showSubscribersError(messageId);
+        verify(view).showSubscribersError(messageId);
     }
 
 
