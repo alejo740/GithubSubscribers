@@ -101,7 +101,6 @@ public class SubscribersListFragment extends Fragment implements SubscribersList
     }
 
     private void loadSubscribers() {
-        swipeLayout.setRefreshing(true);
         presenter.getSubscribersList();
     }
 
@@ -125,12 +124,21 @@ public class SubscribersListFragment extends Fragment implements SubscribersList
     @Override
     public void showSubscribersList(List<Subscriber> subscriberList) {
         subscribersAdapter.setItems(subscriberList);
-        swipeLayout.setRefreshing(false);
     }
 
     @Override
     public void showSubscribersError(int messageId) {
         Toast.makeText(getContext(), messageId, Toast.LENGTH_LONG).show();
+    }
+
+    @Override
+    public void toggleProgress(final boolean active) {
+        swipeLayout.post(new Runnable() {
+            @Override
+            public void run() {
+                swipeLayout.setRefreshing(active);
+            }
+        });
     }
 
     @Override

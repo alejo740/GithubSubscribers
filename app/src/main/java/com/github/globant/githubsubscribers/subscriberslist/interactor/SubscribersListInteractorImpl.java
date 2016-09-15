@@ -35,8 +35,7 @@ public class SubscribersListInteractorImpl implements SubscribersListInteractor 
             @Override
             public void onResponse(Call<List<Subscriber>> call, Response<List<Subscriber>> response) {
                 if (response.isSuccessful()) {
-                    List<Subscriber> userList = new ArrayList<>();
-                    //List<Subscriber> userList = response.body();
+                    List<Subscriber> userList = response.body();
                     listener.onResponse(userList);
                 } else {
                     try {

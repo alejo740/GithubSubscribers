@@ -54,6 +54,7 @@ public class SubscribersListPresenterImpl implements SubscribersListPresenter, S
 
     @Override
     public void getSubscribersList() {
+        view.toggleProgress(true);
         interactor.getSubscribersDataList(this);
     }
 
@@ -61,6 +62,7 @@ public class SubscribersListPresenterImpl implements SubscribersListPresenter, S
     public void onResponse(List<Subscriber> listItems) {
         subscribersListData.clear();
         if (view != null) {
+            view.toggleProgress(false);
             subscribersListData.addAll(listItems);
             view.showSubscribersList(listItems);
         }
@@ -71,6 +73,7 @@ public class SubscribersListPresenterImpl implements SubscribersListPresenter, S
         int messageId = ErrorMessagesHelper.getMessage(type);
         if (messageId > 0 && view != null) {
             view.showSubscribersError(messageId);
+            view.toggleProgress(false);
         }
         Debug.e(TAG + ": " + errorMessage);
     }

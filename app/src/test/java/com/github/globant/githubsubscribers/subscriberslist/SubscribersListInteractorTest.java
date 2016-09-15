@@ -1,7 +1,5 @@
 package com.github.globant.githubsubscribers.subscriberslist;
 
-import android.os.Environment;
-
 import com.github.globant.githubsubscribers.commons.models.Subscriber;
 import com.github.globant.githubsubscribers.commons.utils.Constants;
 import com.github.globant.githubsubscribers.commons.utils.Debug;
@@ -22,14 +20,11 @@ import org.mockito.MockitoAnnotations;
 import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.powermock.modules.junit4.PowerMockRunner;
 
-import static org.mockito.Matchers.anyString;
 import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.verify;
 import static org.powermock.api.mockito.PowerMockito.mockStatic;
 import static org.powermock.api.mockito.PowerMockito.when;
 
-import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -59,7 +54,7 @@ public class SubscribersListInteractorTest {
     private SubscribersListView view;
 
     @Captor
-    private ArgumentCaptor<SubscribersListInteractor.OnFinishedListener> OnFinishedListenerCallBack;
+    private ArgumentCaptor<SubscribersListInteractor.OnFinishedListener> OnFinishedListenerCallback;
 
     private SubscribersListPresenter presenter;
 
@@ -85,10 +80,12 @@ public class SubscribersListInteractorTest {
         presenter.getSubscribersList();
 
         // Then Subscribers list is loaded from Interactor and the callback is captured
-        verify(interactor).getSubscribersDataList(OnFinishedListenerCallBack.capture());
+        verify(interactor).getSubscribersDataList(OnFinishedListenerCallback.capture());
+        verify(view).toggleProgress(true);
 
-        OnFinishedListenerCallBack.getValue().onResponse(subscriberList);
+        OnFinishedListenerCallback.getValue().onResponse(subscriberList);
 
+        verify(view).toggleProgress(false);
         verify(view).showSubscribersList(subscriberList);
     }
 
@@ -106,11 +103,13 @@ public class SubscribersListInteractorTest {
         presenter.getSubscribersList();
 
         // Then Subscribers list is loaded from Interactor and the callback is captured
-        verify(interactor).getSubscribersDataList(OnFinishedListenerCallBack.capture());
+        verify(interactor).getSubscribersDataList(OnFinishedListenerCallback.capture());
+        verify(view).toggleProgress(true);
 
-        OnFinishedListenerCallBack.getValue().onFailure(errorMessage, typeError);
+        OnFinishedListenerCallback.getValue().onFailure(errorMessage, typeError);
 
         int messageId = ErrorMessagesHelper.getMessage(typeError);
+        verify(view).toggleProgress(false);
         verify(view).showSubscribersError(messageId);
     }
 
@@ -128,10 +127,12 @@ public class SubscribersListInteractorTest {
         presenter.getSubscribersList();
 
         // Then Subscribers list is loaded from Interactor and the callback is captured
-        verify(interactor).getSubscribersDataList(OnFinishedListenerCallBack.capture());
+        verify(interactor).getSubscribersDataList(OnFinishedListenerCallback.capture());
+        verify(view).toggleProgress(true);
 
-        OnFinishedListenerCallBack.getValue().onFailure(errorMessage, typeError);
+        OnFinishedListenerCallback.getValue().onFailure(errorMessage, typeError);
 
+        verify(view).toggleProgress(false);
         int messageId = ErrorMessagesHelper.getMessage(typeError);
         verify(view).showSubscribersError(messageId);
     }

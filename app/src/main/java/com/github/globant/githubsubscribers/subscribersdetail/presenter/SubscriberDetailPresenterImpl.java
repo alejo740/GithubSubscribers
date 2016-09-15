@@ -51,7 +51,10 @@ public class SubscriberDetailPresenterImpl implements SubscriberDetailPresenter,
 
     public void onFinishedUser(User userItem) {
         userData = userItem;
-        view.showSubscriberDetails(userData);
+        if (view != null) {
+            view.showSubscriberDetails(userData);
+            view.toggleProgressIndicator(false);
+        }
     }
 
     @Override
@@ -59,6 +62,7 @@ public class SubscriberDetailPresenterImpl implements SubscriberDetailPresenter,
         int messageId = ErrorMessagesHelper.getMessage(type);
         if (messageId > 0 && view != null) {
             view.showUserError(messageId);
+            view.toggleProgressIndicator(false);
         }
         Debug.e(TAG + ": " + errorMessage);
     }
@@ -68,6 +72,7 @@ public class SubscriberDetailPresenterImpl implements SubscriberDetailPresenter,
         int messageId = ErrorMessagesHelper.getMessage(type);
         if (messageId > 0 && view != null) {
             view.showUserError(messageId);
+            view.toggleProgressIndicator(false);
         }
         Debug.e(TAG + ": " + errorMessage);
     }
@@ -76,7 +81,10 @@ public class SubscriberDetailPresenterImpl implements SubscriberDetailPresenter,
     public void onFinishedRepository(List<Repository> repositoryList) {
         repositoryListData.clear();
         repositoryListData.addAll(repositoryList);
-        view.showSubscriberUserRepositories(repositoryListData);
+        if (view != null) {
+            view.showSubscriberUserRepositories(repositoryListData);
+            view.toggleProgressIndicator(false);
+        }
     }
 
     @Override
@@ -88,11 +96,13 @@ public class SubscriberDetailPresenterImpl implements SubscriberDetailPresenter,
 
     @Override
     public void getUser(String userName) {
+        view.toggleProgressIndicator(true);
         interactor.getUserData(userName, this);
     }
 
     @Override
     public void getRepositoryList(String userName) {
+        view.toggleProgressIndicator(true);
         interactor.getUserRepositoryData(userName, this);
     }
 

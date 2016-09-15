@@ -1,5 +1,6 @@
 package com.github.globant.githubsubscribers.subscribersdetail.view;
 
+import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -51,6 +52,7 @@ public class SubscriberDetailFragment extends Fragment implements SubscriberDeta
     private TextView profileReposCounter;
     private RepositoryAdapter repositoriesAdapter;
     private SubscriberDetailPresenter presenter;
+    private ProgressDialog progressBar;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -108,9 +110,18 @@ public class SubscriberDetailFragment extends Fragment implements SubscriberDeta
             recyclerViewSubscribers.setLayoutManager(new LinearLayoutManager(getActivity()));
             recyclerViewSubscribers.setAdapter(repositoriesAdapter);
             repositoriesAdapter.setClickListener(this);
+            loadProgressIndicator(getView());
         } else {
             Debug.i(savedInstanceState.toString());
         }
+    }
+
+    private void loadProgressIndicator(View view) {
+        progressBar = new ProgressDialog(view.getContext());
+        progressBar.setCancelable(false);
+        progressBar.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        progressBar.setTitle(R.string.dialog_title);
+        progressBar.setIndeterminate(true);
     }
 
     @Override
@@ -147,11 +158,23 @@ public class SubscriberDetailFragment extends Fragment implements SubscriberDeta
     public void onDestroy() {
         super.onDestroy();
         presenter.onDestroy();
+        if (progressBar != null && progressBar.isShowing()) {
+            progressBar.dismiss();
+        }
     }
 
     @Override
     public void showUserError(int messageId) {
         Toast.makeText(getContext(), messageId, Toast.LENGTH_LONG).show();
+    }
+
+    @Override
+    public void toggleProgressIndicator(boolean active) {
+        if (active) {
+            progressBar.show();
+        } else {
+            progressBar.dismiss();
+        }
     }
 
     public void showSubscriberDetails(User userInfo) {
