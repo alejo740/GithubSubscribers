@@ -39,6 +39,13 @@ public class SubscribersListPresenterImpl implements SubscribersListPresenter, S
         this.TAG = this.getClass().getSimpleName();
     }
 
+    public SubscribersListPresenterImpl(SubscribersListView view, SubscribersListInteractor interactor) {
+        this.view = view;
+        this.interactor = interactor;
+        this.subscribersListData = new ArrayList<>();
+        this.TAG = this.getClass().getSimpleName();
+    }
+
     @Override
     public void onDestroy() {
         view = null;

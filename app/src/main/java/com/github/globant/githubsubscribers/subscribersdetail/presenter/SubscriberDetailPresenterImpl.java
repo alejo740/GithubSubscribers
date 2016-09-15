@@ -34,6 +34,13 @@ public class SubscriberDetailPresenterImpl implements SubscriberDetailPresenter,
         TAG = this.getClass().getSimpleName();
     }
 
+    public SubscriberDetailPresenterImpl(SubscriberDetailView view, SubscriberDetailInteractor interactor) {
+        this.view = view;
+        this.interactor = interactor;
+        this.repositoryListData = new ArrayList<>();
+        TAG = this.getClass().getSimpleName();
+    }
+
     public SubscriberDetailPresenterImpl(SubscriberDetailView view, User userData, List<Repository> repositoryListData) {
         this.view = view;
         this.interactor = new SubscriberDetailInteractorImpl();
