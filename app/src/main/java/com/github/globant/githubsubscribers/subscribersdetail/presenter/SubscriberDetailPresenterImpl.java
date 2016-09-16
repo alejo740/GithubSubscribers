@@ -51,13 +51,17 @@ public class SubscriberDetailPresenterImpl implements SubscriberDetailPresenter,
 
     public void onFinishedUser(User userItem) {
         userData = userItem;
-        view.showSubscriberDetails(userData);
+        if (view != null) {
+            view.toggleProgressIndicator(false);
+            view.showSubscriberDetails(userData);
+        }
     }
 
     @Override
     public void onFailureUser(String errorMessage, ErrorMessagesHelper.TypeError type) {
         int messageId = ErrorMessagesHelper.getMessage(type);
         if (messageId > 0 && view != null) {
+            view.toggleProgressIndicator(false);
             view.showUserError(messageId);
         }
         Debug.e(TAG + ": " + errorMessage);
@@ -67,6 +71,7 @@ public class SubscriberDetailPresenterImpl implements SubscriberDetailPresenter,
     public void onFailureRepository(String errorMessage, ErrorMessagesHelper.TypeError type) {
         int messageId = ErrorMessagesHelper.getMessage(type);
         if (messageId > 0 && view != null) {
+            view.toggleProgressIndicator(false);
             view.showUserError(messageId);
         }
         Debug.e(TAG + ": " + errorMessage);
@@ -76,7 +81,10 @@ public class SubscriberDetailPresenterImpl implements SubscriberDetailPresenter,
     public void onFinishedRepository(List<Repository> repositoryList) {
         repositoryListData.clear();
         repositoryListData.addAll(repositoryList);
-        view.showSubscriberUserRepositories(repositoryListData);
+        if (view != null) {
+            view.toggleProgressIndicator(false);
+            view.showSubscriberUserRepositories(repositoryListData);
+        }
     }
 
     @Override
@@ -88,11 +96,13 @@ public class SubscriberDetailPresenterImpl implements SubscriberDetailPresenter,
 
     @Override
     public void getUser(String userName) {
+        view.toggleProgressIndicator(true);
         interactor.getUserData(userName, this);
     }
 
     @Override
     public void getRepositoryList(String userName) {
+        view.toggleProgressIndicator(true);
         interactor.getUserRepositoryData(userName, this);
     }
 

@@ -16,4 +16,5 @@ public interface SubscribersListView {
 
     void showSubscribersError(int messageId);
 
+    void toggleProgress(boolean active);
 }

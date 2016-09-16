@@ -19,4 +19,6 @@ public interface SubscriberDetailView {
     void showSubscriberUserRepositories(List<Repository> repositoryList);
 
     void showUserError(int messageId);
+
+    void toggleProgressIndicator(boolean active);
 }

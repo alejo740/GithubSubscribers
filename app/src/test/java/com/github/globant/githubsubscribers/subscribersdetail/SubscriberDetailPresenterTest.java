@@ -74,7 +74,7 @@ public class SubscriberDetailPresenterTest {
     private SubscriberDetailView view;
 
     @Captor
-    private ArgumentCaptor<SubscriberDetailInteractor.OnFinishedListener> OnFinishedListenerCallBack;
+    private ArgumentCaptor<SubscriberDetailInteractor.OnFinishedListener> onFinishedListenerCallback;
 
     private SubscriberDetailPresenter presenter;
 
@@ -101,11 +101,13 @@ public class SubscriberDetailPresenterTest {
         presenter.getUser(USER_NAME_PARAM);
 
         //Then User information is loaded from Interactor and the callback is captured
-        verify(interactor).getUserData(eq(USER_NAME_PARAM), OnFinishedListenerCallBack.capture());
+        verify(interactor).getUserData(eq(USER_NAME_PARAM), onFinishedListenerCallback.capture());
+        verify(view).toggleProgressIndicator(true);
 
-        OnFinishedListenerCallBack.getValue().onFinishedUser(user);
+        onFinishedListenerCallback.getValue().onFinishedUser(user);
 
-        view.showSubscriberDetails(user);
+        verify(view).toggleProgressIndicator(false);
+        verify(view).showSubscriberDetails(user);
     }
 
     /**
@@ -122,12 +124,14 @@ public class SubscriberDetailPresenterTest {
         presenter.getUser(USER_NAME_PARAM);
 
         //Then User information is loaded from Interactor and the callback is captured
-        verify(interactor).getUserData(eq(USER_NAME_PARAM), OnFinishedListenerCallBack.capture());
+        verify(interactor).getUserData(eq(USER_NAME_PARAM), onFinishedListenerCallback.capture());
+        verify(view).toggleProgressIndicator(true);
 
-        OnFinishedListenerCallBack.getValue().onFailureUser(errorMessage, typeError);
+        onFinishedListenerCallback.getValue().onFailureUser(errorMessage, typeError);
 
+        verify(view).toggleProgressIndicator(false);
         int messageId = ErrorMessagesHelper.getMessage(typeError);
-        view.showUserError(messageId);
+        verify(view).showUserError(messageId);
     }
 
     /**
@@ -144,12 +148,14 @@ public class SubscriberDetailPresenterTest {
         presenter.getUser(USER_NAME_PARAM);
 
         //Then User information is loaded from Interactor and the callback is captured
-        verify(interactor).getUserData(eq(USER_NAME_PARAM), OnFinishedListenerCallBack.capture());
+        verify(interactor).getUserData(eq(USER_NAME_PARAM), onFinishedListenerCallback.capture());
+        verify(view).toggleProgressIndicator(true);
 
-        OnFinishedListenerCallBack.getValue().onFailureUser(errorMessage, typeError);
+        onFinishedListenerCallback.getValue().onFailureUser(errorMessage, typeError);
 
+        verify(view).toggleProgressIndicator(false);
         int messageId = ErrorMessagesHelper.getMessage(typeError);
-        view.showUserError(messageId);
+        verify(view).showUserError(messageId);
     }
 
     /**
@@ -169,11 +175,13 @@ public class SubscriberDetailPresenterTest {
         presenter.getRepositoryList(USER_NAME_PARAM);
 
         //Then Repositories list is loaded from Interactor and the callback is captured
-        verify(interactor).getUserRepositoryData(eq(USER_NAME_PARAM), OnFinishedListenerCallBack.capture());
+        verify(interactor).getUserRepositoryData(eq(USER_NAME_PARAM), onFinishedListenerCallback.capture());
+        verify(view).toggleProgressIndicator(true);
 
-        OnFinishedListenerCallBack.getValue().onFinishedRepository(repoList);
+        onFinishedListenerCallback.getValue().onFinishedRepository(repoList);
 
-        view.showSubscriberUserRepositories(repoList);
+        verify(view).toggleProgressIndicator(false);
+        verify(view).showSubscriberUserRepositories(repoList);
     }
 
     /**
@@ -191,12 +199,14 @@ public class SubscriberDetailPresenterTest {
         presenter.getRepositoryList(USER_NAME_PARAM);
 
         //Then Repositories list is loaded from Interactor and the callback is captured
-        verify(interactor).getUserRepositoryData(eq(USER_NAME_PARAM), OnFinishedListenerCallBack.capture());
+        verify(interactor).getUserRepositoryData(eq(USER_NAME_PARAM), onFinishedListenerCallback.capture());
+        verify(view).toggleProgressIndicator(true);
 
-        OnFinishedListenerCallBack.getValue().onFailureRepository(errorMessage, typeError);
+        onFinishedListenerCallback.getValue().onFailureRepository(errorMessage, typeError);
 
+        verify(view).toggleProgressIndicator(false);
         int messageId = ErrorMessagesHelper.getMessage(typeError);
-        view.showUserError(messageId);
+        verify(view).showUserError(messageId);
     }
 
     /**
@@ -213,12 +223,14 @@ public class SubscriberDetailPresenterTest {
         presenter.getRepositoryList(USER_NAME_PARAM);
 
         //Then Repositories list is loaded from Interactor and the callback is captured
-        verify(interactor).getUserRepositoryData(eq(USER_NAME_PARAM), OnFinishedListenerCallBack.capture());
+        verify(interactor).getUserRepositoryData(eq(USER_NAME_PARAM), onFinishedListenerCallback.capture());
+        verify(view).toggleProgressIndicator(true);
 
-        OnFinishedListenerCallBack.getValue().onFailureRepository(errorMessage, typeError);
+        onFinishedListenerCallback.getValue().onFailureRepository(errorMessage, typeError);
 
+        verify(view).toggleProgressIndicator(false);
         int messageId = ErrorMessagesHelper.getMessage(typeError);
-        view.showUserError(messageId);
+        verify(view).showUserError(messageId);
     }
 
 
