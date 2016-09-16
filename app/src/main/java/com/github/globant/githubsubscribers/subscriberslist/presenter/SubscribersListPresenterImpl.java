@@ -72,8 +72,8 @@ public class SubscribersListPresenterImpl implements SubscribersListPresenter, S
     public void onFailure(String errorMessage, ErrorMessagesHelper.TypeError type) {
         int messageId = ErrorMessagesHelper.getMessage(type);
         if (messageId > 0 && view != null) {
-            view.showSubscribersError(messageId);
             view.toggleProgress(false);
+            view.showSubscribersError(messageId);
         }
         Debug.e(TAG + ": " + errorMessage);
     }

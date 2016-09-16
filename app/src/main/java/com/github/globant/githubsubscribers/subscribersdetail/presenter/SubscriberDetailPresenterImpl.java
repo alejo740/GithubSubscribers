@@ -52,8 +52,8 @@ public class SubscriberDetailPresenterImpl implements SubscriberDetailPresenter,
     public void onFinishedUser(User userItem) {
         userData = userItem;
         if (view != null) {
-            view.showSubscriberDetails(userData);
             view.toggleProgressIndicator(false);
+            view.showSubscriberDetails(userData);
         }
     }
 
@@ -61,8 +61,8 @@ public class SubscriberDetailPresenterImpl implements SubscriberDetailPresenter,
     public void onFailureUser(String errorMessage, ErrorMessagesHelper.TypeError type) {
         int messageId = ErrorMessagesHelper.getMessage(type);
         if (messageId > 0 && view != null) {
-            view.showUserError(messageId);
             view.toggleProgressIndicator(false);
+            view.showUserError(messageId);
         }
         Debug.e(TAG + ": " + errorMessage);
     }
@@ -71,8 +71,8 @@ public class SubscriberDetailPresenterImpl implements SubscriberDetailPresenter,
     public void onFailureRepository(String errorMessage, ErrorMessagesHelper.TypeError type) {
         int messageId = ErrorMessagesHelper.getMessage(type);
         if (messageId > 0 && view != null) {
-            view.showUserError(messageId);
             view.toggleProgressIndicator(false);
+            view.showUserError(messageId);
         }
         Debug.e(TAG + ": " + errorMessage);
     }
@@ -82,8 +82,8 @@ public class SubscriberDetailPresenterImpl implements SubscriberDetailPresenter,
         repositoryListData.clear();
         repositoryListData.addAll(repositoryList);
         if (view != null) {
-            view.showSubscriberUserRepositories(repositoryListData);
             view.toggleProgressIndicator(false);
+            view.showSubscriberUserRepositories(repositoryListData);
         }
     }
 

@@ -54,7 +54,7 @@ public class SubscribersListInteractorTest {
     private SubscribersListView view;
 
     @Captor
-    private ArgumentCaptor<SubscribersListInteractor.OnFinishedListener> OnFinishedListenerCallback;
+    private ArgumentCaptor<SubscribersListInteractor.OnFinishedListener> onFinishedListenerCallback;
 
     private SubscribersListPresenter presenter;
 
@@ -80,10 +80,10 @@ public class SubscribersListInteractorTest {
         presenter.getSubscribersList();
 
         // Then Subscribers list is loaded from Interactor and the callback is captured
-        verify(interactor).getSubscribersDataList(OnFinishedListenerCallback.capture());
+        verify(interactor).getSubscribersDataList(onFinishedListenerCallback.capture());
         verify(view).toggleProgress(true);
 
-        OnFinishedListenerCallback.getValue().onResponse(subscriberList);
+        onFinishedListenerCallback.getValue().onResponse(subscriberList);
 
         verify(view).toggleProgress(false);
         verify(view).showSubscribersList(subscriberList);
@@ -103,10 +103,10 @@ public class SubscribersListInteractorTest {
         presenter.getSubscribersList();
 
         // Then Subscribers list is loaded from Interactor and the callback is captured
-        verify(interactor).getSubscribersDataList(OnFinishedListenerCallback.capture());
+        verify(interactor).getSubscribersDataList(onFinishedListenerCallback.capture());
         verify(view).toggleProgress(true);
 
-        OnFinishedListenerCallback.getValue().onFailure(errorMessage, typeError);
+        onFinishedListenerCallback.getValue().onFailure(errorMessage, typeError);
 
         int messageId = ErrorMessagesHelper.getMessage(typeError);
         verify(view).toggleProgress(false);
@@ -127,10 +127,10 @@ public class SubscribersListInteractorTest {
         presenter.getSubscribersList();
 
         // Then Subscribers list is loaded from Interactor and the callback is captured
-        verify(interactor).getSubscribersDataList(OnFinishedListenerCallback.capture());
+        verify(interactor).getSubscribersDataList(onFinishedListenerCallback.capture());
         verify(view).toggleProgress(true);
 
-        OnFinishedListenerCallback.getValue().onFailure(errorMessage, typeError);
+        onFinishedListenerCallback.getValue().onFailure(errorMessage, typeError);
 
         verify(view).toggleProgress(false);
         int messageId = ErrorMessagesHelper.getMessage(typeError);
